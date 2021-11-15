@@ -4,7 +4,8 @@
 import java.util.Random;
 
 public class EnemyGenerator {
-    public static Enemy generate(int row, int col) {
+    public static Enemy generate(int row, int col) 
+    {
         // TODO: replace this with your own code!
         Random numgen = new Random();
         int enemycount = 4; //how many unique enemy types we have
@@ -28,6 +29,8 @@ public class EnemyGenerator {
         {
         return new Enemy("Bladed Mistake",row,col,10,7,2);
         }
+return new Enemy("Sad blob",row,col,10,3,3);
+
     }
 }
 
