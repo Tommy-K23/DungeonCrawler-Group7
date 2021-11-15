@@ -13,11 +13,10 @@ public class Player extends Character {
         items = new Inventory(100);
 
         // give them some basic stuff to start with
-        // TODO make up your own starting equipment
         //Item(name,weight,value,strength)
         items.addAndEquip(new Item(ItemType.Weapon, "Broken Beaker", 5, 12, 7));
         items.addAndEquip(new Item(ItemType.Armor, "Stained Linens", 15, 20, 3));
-        items.add(new Item(ItemType.Other,"Overpriced Tech",8,200,10));
+        items.add(new Item(ItemType.Other,"Overpriced Tech", 8, 200, 0));
     }
 
     @Override
