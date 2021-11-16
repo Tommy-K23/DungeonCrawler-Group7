@@ -9,9 +9,8 @@ public class Main {
         Terminal.rawMode();
 
         // make and run the Game
-        Game game = new Game();
-        game.run();
-
+        MainMenu mm = new MainMenu();
+        mm.run();
         // put terminal back into cooked mode
         Terminal.cookedMode();
     }
