@@ -55,9 +55,11 @@ public class MainMenu
                         handleKey(key);
                         drawCursor(option);
                 }
+                Terminal.clear();
         }
         private void drawCursor(int option)
         {
+            
                 if (option==1)
                 {
                         Terminal.warpCursor(cursorRow,cursorCol);
@@ -170,6 +172,7 @@ public class MainMenu
         private void drawMap()
         {
                 Terminal.reset();
+                Terminal.clear();
                 char cell=' ';
                 for (int r=0; r<22;r++)
                 {
