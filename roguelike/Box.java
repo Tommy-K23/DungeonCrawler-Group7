@@ -16,27 +16,27 @@ public class Box extends Entity {
         }
 
                 
-                public Box(Scanner in)//load
-                {
-                        super(in); 
-                        ItemType type = valueOf(in.nextLine());
-                        String a=in.nextLine();
-                        int b=in.nextInt();
-                        int c=in.nextInt();
-                        int d=in.nextInt();
-                        this.item = new Item(type,a,b,c,d);
-                }
+        public Box(Scanner in)//load
+        {
+                super(in); 
+                ItemType type = ItemType.valueOf(in.nextLine());
+                String a=in.nextLine();
+                int b=in.nextInt();
+                int c=in.nextInt();
+                int d=in.nextInt();
+                this.item = new Item(type,a,b,c,d);
+        }
 
-                @Override
-                public void save(PrintWriter pw)//save
-                {
-                        super(pw);
-                        pw.println(item.getType());
-                        pw.println(item.getName());
-                        pw.println(item.getWeight());
-                        pw.println(item.getValue());
-                        pw.println(item.getStrength());
-                }   
+        @Override
+        public void save(PrintWriter pw)//save
+        {
+                super(pw);
+                pw.println(item.getType());
+                pw.println(item.getName());
+                pw.println(item.getWeight());
+                pw.println(item.getValue());
+                pw.println(item.getStrength());
+        }   
 
 
 
