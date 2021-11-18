@@ -2,7 +2,8 @@
 // this class represents one moveable, drawable thing in the game
 
 import ansi_terminal.*;
-
+import java.util.Scanner;
+import java.io.PrintWriter;
 public class Entity {
     // the location of the entity in space
     private Position position;
@@ -27,6 +28,24 @@ public class Entity {
     // get the position of this entity
     public Position getPosition() {
         return position;
+    }
+    
+    public void save(PrintWriter pw)//Save
+    {
+        pw.println("Entity");
+        pw.println(getRow());
+        pw.println(getCol());
+        pw.println(display);
+    }
+
+
+    public Entity (Scanner in)//Load
+    {
+        in.nextLine();
+        int row=in.nextInt();
+        int col=in.nextInt();
+        position = new Position(row, col);
+        display=in.next().charAt(0);
     }
 
     public int getRow() {

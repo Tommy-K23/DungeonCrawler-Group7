@@ -1,7 +1,8 @@
 // Player.java
 
 import ansi_terminal.*;
-
+import java.util.Scanner;
+import java.io.PrintWriter;
 public class Player extends Character {
     private Inventory items;
 
@@ -14,10 +15,28 @@ public class Player extends Character {
 
         // give them some basic stuff to start with
         //Item(name,weight,value,strength)
-        items.addAndEquip(new Item(ItemType.Weapon, "Broken Beaker", 5, 12, 7));
-        items.addAndEquip(new Item(ItemType.Armor, "Stained Linens", 15, 20, 3));
+        items.addAndEquip(new Item(ItemType.Weapon, "Broken Beaker", 5, 5, 7));
+        items.addAndEquip(new Item(ItemType.Armor, "Stained Linens", 10, 10, 3));
         items.add(new Item(ItemType.Other,"Overpriced Tech", 8, 200, 0));
     }
+    @Override
+    public void save(PrintWriter pw)
+    {
+    super.save(pw);
+    pw.println(name);
+    for (Item i : items)
+    {
+    pw.println(i.getType());
+    pw.println(i.getName());
+    pw.println(i.getWeight());
+    pw.println(i.getValue());
+    pw.println(i.getStrength());
+    }
+
+    }
+
+    
+
 
     @Override
     public int getDamage() {
