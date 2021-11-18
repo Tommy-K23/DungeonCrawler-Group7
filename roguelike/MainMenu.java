@@ -126,7 +126,12 @@ public class MainMenu
                 switch (option)
                 {
 
-                        case 1: 
+                        case 1:
+                                Terminal.warpCursor(21, 0);
+                                String name = Terminal.getLine("What is your name? ");
+                                Terminal.warpCursor(21, 0);
+                                String profession = Terminal.getLine("Hello, " + name + "! What is your profession? ");
+                                Terminal.warpCursor(21, 0);
                                 Game game = new Game();
                                 game.run();
                                 drawMap();
