@@ -197,5 +197,17 @@ public class Inventory {
             return items.get(realIndex);
         }
     }
+
+    public int getNumItems() {
+        int numItems = 0;
+        for (Item i : items) {
+            numItems++;
+        }
+        return numItems;
+    }
+
+    public Item getItem(int i) {
+        items.get(i);
+    }
 }
 
