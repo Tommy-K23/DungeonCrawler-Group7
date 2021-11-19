@@ -207,7 +207,7 @@ public class Inventory {
     }
 
     public Item getItem(int i) {
-        items.get(i);
+      return items.get(i);
     }
 }
 

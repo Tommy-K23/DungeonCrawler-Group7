@@ -11,7 +11,7 @@ public class Box extends Entity {
 
         // add a box with a given item in it
         public Box(int row, int col, Item item) {
-                super(row, col, 'i', Color.MAGENTA);
+                super(row, col, '^', Color.MAGENTA);
                 this.item = item;
         }
 
@@ -30,7 +30,7 @@ public class Box extends Entity {
         @Override
         public void save(PrintWriter pw)//save
         {
-                super(pw);
+       //         super(pw);
                 pw.println(item.getType());
                 pw.println(item.getName());
                 pw.println(item.getWeight());

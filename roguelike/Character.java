@@ -73,7 +73,7 @@ public abstract class Character extends Entity {
         boolean killed = dealDamage(other, room);
         if (killed) {
             enemies.remove(other);
-
+	}
         System.out.printf("Press any key to return...\n\r");
         Terminal.getKey();
 
@@ -90,5 +90,5 @@ public abstract class Character extends Entity {
         Terminal.getKey();
         return true;
         }
-}
+   }
 

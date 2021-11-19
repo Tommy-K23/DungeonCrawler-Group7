@@ -12,7 +12,7 @@ public class Enemy extends Character {
         private boolean battleActive;
 
         public Enemy(String name, int row, int col, int hp, int damage, int protection) {
-                super(row, col, '*', Color.RED, hp);
+                super(row, col, '%', Color.RED, hp);
                 this.name = name;
                 this.damage = damage;
                 this.protection = protection;

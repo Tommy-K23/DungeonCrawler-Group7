@@ -9,12 +9,18 @@ public class Game {
     private Player player;
     private ArrayList<Box> boxes;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Teleport> teleporters;
+    private ArrayList<Enemy> boss;
+    private World world;
 
     public Game() {
         room = new Room();
         player = new Player(room.getPlayerStart());
         boxes = room.getBoxes();
         enemies = room.getEnemies();
+	teleporters = room.getTeleport();
+	boss = room.getBoss();
+	world = new World();
     }
 
   // prints a help menu to the left of the map
@@ -22,6 +28,7 @@ public class Game {
         String[] cmds = {"Commands:",
                          "---------",
                          "Move: WASD",
+			 "Use: f",
                          "Pickup an item: e",
                          "Drop an item: q",
                          "List items: i",
@@ -66,7 +73,24 @@ public class Game {
             Terminal.pause(1.25);
         }
     }
-
+    private void teleport() {
+	Box thing = checkForBox();
+	if (thing == null) {
+	   setStatus("There is nothing here...");
+	   Terminal.pause(1.25);
+	} else {
+	//    if (Teleporter() == world.getOne()){
+	//	setStatus("Going down.");
+	//	Terminal.pause(1.25);
+	//    }else if (Teleporter() == gridTwo){
+	//	setStatus("You find a fake book and pull it. Revealing a hidden room...");
+	//	Terminal.pause(1.25);
+	 //   }else if (Teleporter() == endSreen){
+	//	setStatus("You find a ladder down to the outside");
+	//	Terminal.pause(1.25);
+	  //  }
+        }
+} 
     // code for when the player tries to drop an item
     private void drop() {
         if (checkForBox() == null) {
@@ -106,6 +130,10 @@ public class Game {
                 player.getInventory().equipArmor();
                 redrawMapAndHelp();
                 break;
+	    case f:
+		teleport();
+		room.changeMap();
+		redrawMapAndHelp();
 
             // handle movement
             case a: player.move(0, -1, room);

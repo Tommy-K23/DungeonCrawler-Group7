@@ -14,11 +14,9 @@ public class Room {
 
    public Room() {
 	World world = new World();
-	 // this initializes the grid for each room
+	 // this initializes the grid for room one
 	this.grid = world.getOne();
-	//if(Player.getRow() == 29 && Player.getCol() == 30){
-	
-	//}
+			
        // this initializes the room to one specific space
         if (grid == world.getOne()) {
 		this.rows = 31;
@@ -29,9 +27,7 @@ public class Room {
 	}else if (grid == world.getThree()) {
 		this.rows = 91;
 		this.cols = 28;
-	}
-
-       
+	} 
 
    }
 
@@ -62,6 +58,23 @@ public class Room {
 
         return boxes;
     }
+    // returns a set of teleporters for each map
+    public ArrayList<Teleport> getTeleport() {
+	ArrayList<Teleport> teleports = new ArrayList<Teleport>();
+	for (int row = 0; row < rows; row++) {
+	    for (int col = 0; col < cols; col++) {
+		if (grid[row].charAt(col) == '*') {
+		   teleports.add(new Teleport(row, col));
+		   
+                }
+            }
+        }
+        return teleports;
+    }
+    
+    public void changeMap(){
+		
+    }	
 
     // returns a set of enemies from this map, similarly to the boxes above
     public ArrayList<Enemy> getEnemies() {
@@ -118,13 +131,9 @@ public class Room {
 
     // returns if a given cell in the map is walkable or not
     public boolean canGo(int row, int col) {
-	if (grid[row].charAt(col) != '#' || grid[row].charAt(col) != '/') {
-		return true;
-	}else {
-		return false;
-	}
+	return grid[row].charAt(col) != '#';
+
     }
+
+
 }
-
-
-
