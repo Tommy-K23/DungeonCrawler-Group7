@@ -57,37 +57,38 @@ public abstract class Character extends Entity {
         {
                 super.save(pw);
                 pw.println(hp);
-        }   
-
-        public Character(Scanner in)//load
-        {
-                super(in);
-                hp=in.nextInt();
         }
 
-        // this method performs one round of battle between two characters
-        // return false if the player has died aas a result
-        public boolean fight(Character other, Room room, ArrayList<Enemy> enemies) {
-                // do damage to them first
-                boolean killed = dealDamage(other, room);
-                if (killed) {
-                        enemies.remove(other);
-                }
-                System.out.printf("Press any key to return...\n\r");
-                Terminal.getKey();
+	public Character(Scanner in)//load
+	{
+		super(in);
+		hp=in.nextInt();
+	}   
 
-                // don't allow dead enemies to fight back
-                if (killed) {
-                        return true;
-                }
 
-                // now take damage from them
-                if (other.dealDamage(this, room)) {
-                        return false;
-                }
-                System.out.printf("Press any key to return...\n\r");
-                Terminal.getKey();
-                return true;
+    // this method performs one round of battle between two characters
+    // return false if the player has died as a result
+    public boolean fight(Character other, Room room, ArrayList<Enemy> enemies) {
+        // do damage to them first
+        boolean killed = dealDamage(other, room);
+        if (killed) {
+            enemies.remove(other);
+
+        System.out.printf("Press any key to return...\n\r");
+        Terminal.getKey();
+
+        // don't allow dead enemies to fight back
+        if (killed) {
+               return true;
+        }
+
+        // now take damage from them
+        if (other.dealDamage(this, room)) {
+                 return false;
+        }
+        System.out.printf("Press any key to return...\n\r");
+        Terminal.getKey();
+        return true;
         }
 }
 

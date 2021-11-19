@@ -17,17 +17,17 @@ public class Game {
         enemies = room.getEnemies();
     }
 
-    // prints a help menu to the left of the map
+  // prints a help menu to the left of the map
     private void showHelp() {
         String[] cmds = {"Commands:",
                          "---------",
-                         "Move: Arrow Keys",
-                         "Pickup an item: p",
-                         "Drop an item: d",
-                         "List items: l",
-                         "Equip weapon: w",
-                         "Equip armor: a",
-                         "Quit: q"
+                         "Move: WASD",
+                         "Pickup an item: e",
+                         "Drop an item: q",
+                         "List items: i",
+                         "Equip weapon: r",
+                         "Equip armor: t",
+                         "Quit: ESC"
         };
         Terminal.setForeground(Color.GREEN);
         for (int row = 0; row < cmds.length; row++) {
@@ -84,41 +84,41 @@ public class Game {
     // handle the key which was read - return false if we quit the game
     private boolean handleKey(Key key) {
         switch (key) {
-            case p:
+            case e:
                 pickup();
                 break;
 
-            case l:
+            case i:
                 player.getInventory().print();
                 redrawMapAndHelp();
                 break;
 
-            case d:
+            case q:
                 drop();
                 break;
 
-            case w:
+            case r:
                 player.getInventory().equipWeapon();
                 redrawMapAndHelp();
                 break;
 
-            case a:
+            case t:
                 player.getInventory().equipArmor();
                 redrawMapAndHelp();
                 break;
 
             // handle movement
-            case LEFT: player.move(0, -1, room);
+            case a: player.move(0, -1, room);
                 break;
-            case RIGHT: player.move(0, 1, room);
+            case d: player.move(0, 1, room);
                 break;
-            case UP: player.move(-1, 0, room);
+            case w: player.move(-1, 0, room);
                 break;
-            case DOWN: player.move(1, 0, room);
+            case s: player.move(1, 0, room);
                 break;
 
             // and finally the quit command
-            case q:
+            case ESCAPE:
                 return false;
         }
 

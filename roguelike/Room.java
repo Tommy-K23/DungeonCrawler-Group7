@@ -1,58 +1,39 @@
 // Room.java
 // provides code for the drawing of a room
 // also provides starting locations for the player, boxes, and enemies
-
+import java.util.Scanner;
 import java.util.ArrayList;
 import ansi_terminal.*;
 
 public class Room {
     // the grid holds the room geometry
-    private String[] grid;
-
+   private String grid[];
     // the size of the room
-    private int rows;
-    private int cols;
+   private int rows;
+   private int cols;
 
-    public Room() {
-        // this initializes the room to one specific space
-        rows = 30;
-        cols = 60;
+   public Room() {
+	World world = new World();
+	 // this initializes the grid for each room
+	this.grid = world.getOne();
+	//if(Player.getRow() == 29 && Player.getCol() == 30){
+	
+	//}
+       // this initializes the room to one specific space
+        if (grid == world.getOne()) {
+		this.rows = 31;
+		this.cols = 57;
+	}else if (grid == world.getTwo()) {
+		this.rows = 84;
+		this.cols = 24;
+	}else if (grid == world.getThree()) {
+		this.rows = 91;
+		this.cols = 28;
+	}
 
-        // the actual room geometry
-        // the i cells refer to where an item should be placed at
-        grid  = new String[] {
-            "##################                ######################    ",
-            "##              ##                ##      i           ##    ",
-            "##  @           ###########       ##        *         ##    ",
-            "##                       ##       ##                  ##    ",
-            "##              #######  ##       ##################  ##    ",
-            "##              ##   ##  ##                       ##  ##    ",
-            "##################   ##  ##################       ##  ##    ",
-            "                     ##                  ##       ##  ##    ",
-            "                     ##   *  i           ##       ##  ##    ",
-            "                     ##                  ##       ##  ##    ",
-            "                     ##############  ######       ##  ##    ",
-            "                                 ##  ##           ##  ##    ",
-            "                                 ##  ##           ##  ##    ",
-            "                       ############  ###############  ######",
-            "                       ##                                 ##",
-            "                       ##                                 ##",
-            "    #####################                  *              ##",
-            "    ##                                                    ##",
-            "    ##  #################                                 ##",
-            "    ##  ##             ##                                 ##",
-            "    ##  ##             #################  ##################",
-            "    ##  ##                            ##  ##                ",
-            "    ##  ##                            ##  ##                ",
-            "    ##  ##                       #######  #######           ",
-            "    ##  ##                       ##            ##           ",
-            "######  ####                     ##  i  *      ##           ",
-            "##        ##                     ##            ##           ",
-            "## i  *   ##                     ################           ",
-            "##        ##                                                ",
-            "############                                                "
-        };
-    }
+       
+
+   }
 
     // returns the player's strting location in this room
     public Position getPlayerStart() {
@@ -73,7 +54,7 @@ public class Room {
         ArrayList<Box> boxes = new ArrayList<Box>();
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                if (grid[row].charAt(col) == 'i') {
+                if (grid[row].charAt(col) == '^') {
                     boxes.add(new Box(row, col, ItemGenerator.generate()));
                 }
             }
@@ -87,13 +68,25 @@ public class Room {
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                if (grid[row].charAt(col) == '*') {
+                if (grid[row].charAt(col) == '%') {
                     enemies.add(EnemyGenerator.generate(row, col));
                 }
             }
         }
 
         return enemies;
+    }
+    // returns a boss for the final map
+    public ArrayList<Enemy> getBoss() {
+       ArrayList<Enemy> boss = new ArrayList<Enemy>();
+       for (int row = 0; row <rows; row++){
+           for (int col = 0; col < cols; col++){
+	       if (grid[row].charAt(col) == '&'){
+		   boss.add(new Enemy("Inseminated Chicken", row, col, 40, 10, 15));
+               }
+           }
+       }
+	return boss; 
     }
 
     public int getRows() {
@@ -125,7 +118,11 @@ public class Room {
 
     // returns if a given cell in the map is walkable or not
     public boolean canGo(int row, int col) {
-        return grid[row].charAt(col) != '#';
+	if (grid[row].charAt(col) != '#' || grid[row].charAt(col) != '/') {
+		return true;
+	}else {
+		return false;
+	}
     }
 }
 
