@@ -30,7 +30,7 @@ public class Box extends Entity {
         @Override
         public void save(PrintWriter pw)//save
         {
-                super(pw);
+                super.save(pw);
                 pw.println(item.getType());
                 pw.println(item.getName());
                 pw.println(item.getWeight());
