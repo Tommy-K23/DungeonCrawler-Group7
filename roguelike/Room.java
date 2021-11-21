@@ -4,7 +4,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import ansi_terminal.*;
-
+import java.io.PrintWriter;
 public class Room {
     // the grid holds the room geometry
    private String grid[];
@@ -13,7 +13,6 @@ public class Room {
    private int cols;
 
    public Room() {
-	World world = new World();
 	 // this initializes the grid for room one
 	this.grid = world.getOne();
 			
@@ -30,6 +29,19 @@ public class Room {
 	} 
 
    }
+    
+    public save(PrintWriter pw)
+    {
+    // we need to save boxes and enemies.
+    pw.println("saving Room below.");
+    for (Box box : boxes)
+    {box.save();}
+
+    for (Enemy enemy : enemies)
+    {enemy.save();}
+
+    }
+
 
     // returns the player's strting location in this room
     public Position getPlayerStart() {
@@ -72,10 +84,6 @@ public class Room {
         return teleports;
     }
     
-    public void changeMap(){
-		
-    }	
-
     // returns a set of enemies from this map, similarly to the boxes above
     public ArrayList<Enemy> getEnemies() {
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -95,7 +103,7 @@ public class Room {
        for (int row = 0; row <rows; row++){
            for (int col = 0; col < cols; col++){
 	       if (grid[row].charAt(col) == '&'){
-		   boss.add(new Enemy("Inseminated Chicken", row, col, 40, 10, 15));
+		   boss.add(new Enemy("Chicken Chimera", row, col, 40, 10, 15));
                }
            }
        }
