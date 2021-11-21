@@ -3,7 +3,8 @@
 
 import java.util.ArrayList;
 import ansi_terminal.*;
-
+import java.util.Scanner;
+import java.io.PrintWriter
 public class Game {
         private Room room;
         private Player player;
@@ -44,7 +45,24 @@ public class Game {
                 }
                 Terminal.reset();
         }
+        //Saves the game to a file, "save.txt"
+        public void save()//probably need to add try catch block.
+        {
+        File save = new File ("save.txt")
+        PrintWriter pw = new PrintWriter(save);
+        World.save();//calls world save, which calls rooms 1,2, and 3, to save. This in turn should save each of their respective boxes, and enemies. Player.save should be called separately.
+        player.save();
+        }
 
+        public Game (Scanner in)//Load the game from a text save file, NEEDS A TRY CATCH BLOCK.
+        {File load = new File ("save.txt");//This might not be correct!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        world = new World(in);
+        Player = new Player(in);
+        boxes = world.getCurrentRoom().getBoxes();
+        enemies = World.getCurrentRoom().getEnemies();
+        Teleporters = room.getTeleport();
+
+        }
         // right under the map we keep a line for status messages
         private void setStatus(String mesg) {
                 // clear anything old first
@@ -75,7 +93,7 @@ public class Game {
                 }
         }
         private void teleport() {
-                Teleport thing = checkForTeleport();
+                Teleport thing = checkForTeleporter();
                 if (thing == null) {
                         setStatus("There is nothing here...");
                         Terminal.pause(1.25);
