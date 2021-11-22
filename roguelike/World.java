@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.PrintWriter;
+import java.io.PrintWriter;
 public class World
 {
         String grid1 [] = 
@@ -154,7 +154,7 @@ public class World
 
         }
 
-        public void save(Printwriter pw)
+        public void save(PrintWriter pw)
         {
         r1.save(pw);
         r2.save(pw);

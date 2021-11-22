@@ -34,9 +34,11 @@ public class Room {
     {
     // we need to save boxes and enemies.
     pw.println("Saving room below.");
+    ArrayList<Box> boxes = getBoxes();
     for (Box box : boxes)
     {box.save(pw);}
 
+    ArrayList<Enemy> enemies = getEnemies();
     for (Enemy enemy : enemies)
     {enemy.save(pw);}
 
@@ -71,7 +73,7 @@ public class Room {
         return boxes;
     }
     // returns a set of teleporters for each map
-    public ArrayList<Teleport> getTeleporters() {
+    public ArrayList<Teleporter> getTeleporters() {
 	ArrayList<Teleporter> teleporters = new ArrayList<Teleporter>();
 	for (int row = 0; row < rows; row++) {
 	    for (int col = 0; col < cols; col++) {

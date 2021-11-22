@@ -44,9 +44,22 @@ public class Player extends Character {
 
     }
 
-    public void Player(Scanner in) 
+    public Player(Scanner in) 
     {
-	//compiler issue in Game: 66 
+	super(in);
+    name=in.nextLine();
+    int numItems=items.getNumItems();
+    items = new Inventory(100);
+    for (int i=0;i<numItems;i++)
+        {
+        ItemType itype= ItemType.valueOf(in.next());
+        String iname=in.nextLine();
+        int iweight = in.nextInt();
+        int ivalue = in.nextInt();
+        int istrength=in.nextInt();
+        items.add(new Item(itype,iname,iweight,ivalue,istrength));
+        }
+
     }
 
     @Override

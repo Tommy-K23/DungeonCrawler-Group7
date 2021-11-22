@@ -5,13 +5,11 @@ int end = 0;
 
 public Teleporter(int start, int end, int row, int col)//start is the Room where the Teleporter is, and end is where the Teleport brings you.
 {
-super(row, col, '*', Color.YELLOW);
+super(row, col, '*', Color.PURPLE);
 this.start=start;
 this.end=end;
 }
 
-public Position getPosition()
-{return position;}
 
 public int getStartRoom()//just here to be useful.
 {return start;}
