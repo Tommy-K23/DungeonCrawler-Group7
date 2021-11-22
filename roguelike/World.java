@@ -102,11 +102,11 @@ public class World
 "                                                               #######                    ",
         };
 
-        Room currentRoom = null;
-	int roomNum = 1;
-	Room r1;
-	Room r2;
-	Room r3;
+        static Room currentRoom = null;
+	    int roomNum = 1;
+	    static Room r1;
+    	static Room r2;
+	    static Room r3;
         public World() //Supposed to create the 3 levels, then set the current room to room 1.
         {
                 r1 = new Room(grid1);
@@ -141,7 +141,7 @@ public class World
         }
 
 
-        public int getRoomNum()//returns the level number for the current room.
+        public static int getRoomNum()//returns the level number for the current room.
         {
                 if (currentRoom==r1)
                 {return 1;}

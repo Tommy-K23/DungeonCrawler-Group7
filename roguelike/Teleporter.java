@@ -1,3 +1,5 @@
+import ansi_terminal.*;
+
 public class Teleporter extends Entity{
 
 int start = 0;
@@ -5,7 +7,7 @@ int end = 0;
 
 public Teleporter(int start, int end, int row, int col)//start is the Room where the Teleporter is, and end is where the Teleport brings you.
 {
-super(row, col, '*', Color.PURPLE);
+super(row, col, '*', Color.MAGENTA);
 this.start=start;
 this.end=end;
 }

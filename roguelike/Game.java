@@ -6,6 +6,7 @@ import ansi_terminal.*;
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
+import java.io.File;
 
 public class Game {
         private Room room;
