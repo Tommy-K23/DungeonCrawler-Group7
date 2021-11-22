@@ -11,19 +11,19 @@ public class Room {
     // the size of the room
    private int rows;
    private int cols;
-
+   int roomNum = World.getRoomNum();
    public Room(String grid[]) {
 	 // this initializes the grid for room one
 	this.grid = grid;
 			
        // this initializes the room to one specific space
-        if (grid == world.getOne()) {
+        if (roomNum == 1) {
 		this.rows = 31;
 		this.cols = 57;
-	}else if (grid == world.getTwo()) {
+	}else if (roomNum == 2) {
 		this.rows = 84;
 		this.cols = 24;
-	}else if (grid == world.getThree()) {
+	}else if (roomNum == 3) {
 		this.rows = 91;
 		this.cols = 28;
 	} 
@@ -76,7 +76,7 @@ public class Room {
 	for (int row = 0; row < rows; row++) {
 	    for (int col = 0; col < cols; col++) {
 		if (grid[row].charAt(col) == '*') {
-		   teleporters.add(new Teleporter(row, col));
+		   teleporters.add(new Teleporter(roomNum, roomNum + 1, row, col));
 		   
                 }
             }

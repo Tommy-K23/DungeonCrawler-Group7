@@ -18,11 +18,11 @@ public class Game {
 
         public Game() {
                 world = new World();
-                room = getCurrentRoom();;
+                room = getCurrentRoom();
                 player = new Player(room.getPlayerStart());
                 boxes = room.getBoxes();
                 enemies = room.getEnemies();
-                teleporters = room.getTeleport();
+                teleporters = room.getTeleporters();
                 boss = room.getBoss();
                 world = new World();
         }
@@ -61,12 +61,13 @@ public class Game {
         }
 
         public Game (Scanner in)//Load the game from a text save file, NEEDS A TRY CATCH BLOCK.
-        {File load = new File ("save.txt");//This might not be correct!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	{Room r = World.getCurrentRoom();
+        File load = new File ("save.txt");//This might not be correct!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         world = new World(in);
         Player = new Player(in);
         boxes = world.getCurrentRoom().getBoxes();
-        enemies = World.getCurrentRoom().getEnemies();
-        Teleporters = room.getTeleport();
+        enemies = r.getEnemies();
+        teleporters = room.getTeleporters();
 
         }
 
@@ -102,24 +103,17 @@ public class Game {
                         Terminal.pause(1.25);
                 }
         }
+
         private void teleport() {
-                Teleport thing = checkForTeleporter();
-                if (thing == null) {
-                        setStatus("There is nothing here...");
-                        Terminal.pause(1.25);
-                } else {
-                        //if (thing  == world.getOne()){
-                        //	setStatus("Going down.");
-                        //	Terminal.pause(1.25);
-                        //    }else if (Teleporter() == gridTwo){
-                        //	setStatus("You find a fake book and pull it. Revealing a hidden room...");
-                        //	Terminal.pause(1.25);
-                        //   }else if (Teleporter() == endSreen){
-                        //	setStatus("You find a ladder down to the outside");
-                        //	Terminal.pause(1.25);
-                        //  }
-                }
-        } 
+	     Teleporter thing = checkForTeleport();
+	     if (thing == null) 
+	     {     setStatus("There's nothing to use here...");
+		   Terminal.pause(1.25); }
+	     else {
+		  world.changeRoom(teleporters.getEndRoom());
+	     }
+	}
+ 
         // code for when the player tries to drop an item
         private void drop() {
                 if (checkForBox() == null) {
@@ -160,9 +154,9 @@ public class Game {
                                 redrawMapAndHelp();
                                 break;
                         case f:
-                                teleport();
-                                room.changeMap();
+                  		teleport();              
                                 redrawMapAndHelp();
+				break;
 
                                 // handle movement
                         case a: player.move(0, -1, room);
@@ -206,9 +200,9 @@ public class Game {
         {
                 Position playerLocation = player.getPosition();
 
-                for (Teleport teleport : teleports){
-                        if (playerLocation.equals(teleport.getPosition()))
-                        {return teleport;
+                for (Teleporter t : teleporters){
+                        if (playerLocation.equals(t.getPosition()))
+                        {return t;
                         }
                 }
                 return null;

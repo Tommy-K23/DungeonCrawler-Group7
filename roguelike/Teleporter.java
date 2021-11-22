@@ -1,22 +1,22 @@
 public class Teleporter extends Entity{
 
-Room start = null;
-Room end = null;
+int start = 0;
+int end = 0;
 
-public Teleport(Room start, Room end, int row, int col)//start is the Room where the Teleporter is, and end is where the Teleport brings you.
+public Teleporter(int start, int end, int row, int col)//start is the Room where the Teleporter is, and end is where the Teleport brings you.
 {
-super(row,col,'*',color.BLUE);
+super(row, col, '*', Color.YELLOW);
 this.start=start;
 this.end=end;
 }
 
-public getPosition()
+public Position getPosition()
 {return position;}
 
-public getStartRoom()//just here to be useful.
+public int getStartRoom()//just here to be useful.
 {return start;}
 
-public getEndRoom()//use this in conjunction with the "changeRoom()" method to teleport.
+public int getEndRoom()//use this in conjunction with the "changeRoom()" method to teleport.
 {return end;}
 
 //I don't think (I'm unsure though), whether we really need to save this.

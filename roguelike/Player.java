@@ -44,6 +44,11 @@ public class Player extends Character {
 
     }
 
+    public void Player(Scanner in) 
+    {
+	//compiler issue in Game: 66 
+    }
+
     @Override
     public int getDamage() {
         Item weapon = items.getEquippedWeapon();
