@@ -4,7 +4,9 @@
 import java.util.ArrayList;
 import ansi_terminal.*;
 import java.util.Scanner;
-import java.io.PrintWriter
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
+
 public class Game {
         private Room room;
         private Player player;
@@ -45,13 +47,17 @@ public class Game {
                 }
                 Terminal.reset();
         }
+
         //Saves the game to a file, "save.txt"
-        public void save()//probably need to add try catch block.
-        {
-        File save = new File ("save.txt")
-        PrintWriter pw = new PrintWriter(save);
-        World.save();//calls world save, which calls rooms 1,2, and 3, to save. This in turn should save each of their respective boxes, and enemies. Player.save should be called separately.
-        player.save();
+        public void save() {
+            try { 
+                File save = new File ("save.txt");
+                PrintWriter pw = new PrintWriter(save);
+                world.save(pw);//calls world save, which calls rooms 1,2, and 3, to save. This in turn should save each of their respective boxes, and enemies. Player.save should be called separately.
+                player.save(pw);
+            } catch (FileNotFoundException e) {
+                System.out.print("Could not load save file.\n\r");
+            }
         }
 
         public Game (Scanner in)//Load the game from a text save file, NEEDS A TRY CATCH BLOCK.
@@ -198,7 +204,7 @@ public class Game {
 
         private Teleporter checkForTeleport()
         {
-                Position player Location=player.getPosition();
+                Position playerLocation = player.getPosition();
 
                 for (Teleport teleport : teleports){
                         if (playerLocation.equals(teleport.getPosition()))

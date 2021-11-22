@@ -30,10 +30,10 @@ public class Room {
 
    }
     
-    public save(PrintWriter pw)
+    public void save(PrintWriter pw)
     {
     // we need to save boxes and enemies.
-    pw.println("saving Room below.");
+    pw.println("Saving room below.");
     for (Box box : boxes)
     {box.save(pw);}
 
