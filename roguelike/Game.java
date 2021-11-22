@@ -63,6 +63,10 @@ public class Game {
         Teleporters = room.getTeleport();
 
         }
+
+
+
+
         // right under the map we keep a line for status messages
         private void setStatus(String mesg) {
                 // clear anything old first

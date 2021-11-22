@@ -12,9 +12,9 @@ public class Room {
    private int rows;
    private int cols;
 
-   public Room() {
+   public Room(String grid[]) {
 	 // this initializes the grid for room one
-	this.grid = world.getOne();
+	this.grid = grid;
 			
        // this initializes the room to one specific space
         if (grid == world.getOne()) {
