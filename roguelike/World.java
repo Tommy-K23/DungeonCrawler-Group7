@@ -61,7 +61,7 @@ public class World
 "        ##           ##              ##        ##               ##             ##  ",
 "        ##    %    ^ ##              ##        ##               ##     ^       ##  ",
 "        ##           ##              ##        ##               ##             ##  ",
-"        ##           ##              ##    @   ##               ##             ##  ",
+"        ##           ##              ##   @    ##               ##             ##  ",  
 "        ###############              #####  #####               #################  ",
 "                                     ##        ##                                  ",
 "                                     ##        ##                                  ",
@@ -113,9 +113,9 @@ public class World
         {
                 r1 = new Room(grid1, 31, 56);
 
-                r2 = new Room(grid2,24, 84 );
+                r2 = new Room(grid2, 25, 83);
 
-                r3 = new Room(grid3, 28, 91);
+                r3 = new Room(grid3, 28, 90);
 
                 currentRoom = r1;
         }
@@ -129,13 +129,19 @@ public class World
         {
 
                 if (x==1)
-                {currentRoom=r1;}
+                {currentRoom=r1;
+		 roomNum = 1;
+		}
 
                 if(x==2)
-                {currentRoom=r2;}
+                {currentRoom=r2;
+		 roomNum = 2;
+		}
 
                 if(x==3)
-                {currentRoom=r3;}
+                {currentRoom=r3;
+		 roomNum = 3;
+		}
 		
 		if (x>3)
 		{

@@ -16,14 +16,20 @@ public class Game {
         private ArrayList<Teleporter> teleporters;
         private ArrayList<Enemy> boss;
         private World world;
+	private String name;
+	private String profession;
         PrintWriter pw =null;
         public Game() {
                 Terminal.warpCursor(21, 0);
-                String name = Terminal.getLine("What is your name? ");
+                name = Terminal.getLine("What is your name? ");
                 Terminal.warpCursor(21, 0);
-                String profession = Terminal.getLine("What is your profession? ");
+                profession = Terminal.getLine("What is your profession? ");
                 Terminal.warpCursor(21, 0);
-                world = new World();
+		world = new World();
+		setPlaces();
+        }
+
+	private void setPlaces() {        	   
                 room = world.getCurrentRoom();
                 player = new Player(room.getPlayerStart());
                 player.setName(name);
@@ -33,7 +39,7 @@ public class Game {
                 teleporters = room.getTeleporters();
                 boss = room.getBoss();
                 world = new World();
-        }
+	}
 
         // prints a help menu to the left of the map
         private void showHelp() {
@@ -127,7 +133,9 @@ public class Game {
                 else {
                       setStatus("Changing Rooms...");
 		      Terminal.pause(1.25); 
-		      world.changeRoom(thing.getEndRoom());
+		      world.changeRoom(world.getRoomNum()+1);
+		      setPlaces();
+		     // room = world.getCurrentRoom();
                 }
         }
 
@@ -176,7 +184,7 @@ public class Game {
                         case f:
                                 teleport();              
                                 redrawMapAndHelp();
-                                break;
+			        break;
 
                                 // handle movement
                         case a: player.move(0, -1, room);
@@ -253,7 +261,6 @@ public class Game {
         public void run() {
                 // draw these for the first time now
                 redrawMapAndHelp();
-
                 boolean playing = true;
                 while (playing) {
                         // draw the entities
@@ -263,6 +270,9 @@ public class Game {
                         for (Enemy enemy : enemies) {
                                 enemy.draw();
                         }
+			for (Teleporter tp : teleporters){
+				tp.draw();
+			}
                         player.draw();
 
                         // read a key from the user
@@ -289,6 +299,10 @@ public class Game {
                         if (thingHere != null) {
                                 setStatus("Here you find: " + thingHere.getItem().getName());
                         }
+			Teleporter tpHere = checkForTeleport();
+			if (tpHere != null) {
+				setStatus("Press f to change rooms.");
+			}
                 }
         }
 }

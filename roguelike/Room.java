@@ -11,7 +11,7 @@ public class Room {
     // the size of the room
    private int rows;
    private int cols;
-   int roomNum = World.getRoomNum();
+   int roomNum = 1;
    public Room(String grid[], int rows, int cols) {
 	 // this initializes the grid for room one
 	this.grid = grid;
