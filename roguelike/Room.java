@@ -12,21 +12,12 @@ public class Room {
    private int rows;
    private int cols;
    int roomNum = World.getRoomNum();
-   public Room(String grid[]) {
+   public Room(String grid[], int rows, int cols) {
 	 // this initializes the grid for room one
 	this.grid = grid;
-			
-       // this initializes the room to one specific space
-        if (roomNum == 1) {
-		this.rows = 31;
-		this.cols = 57;
-	}else if (roomNum == 2) {
-		this.rows = 84;
-		this.cols = 24;
-	}else if (roomNum == 3) {
-		this.rows = 91;
-		this.cols = 28;
-	} 
+        this.rows = rows;
+	this.cols = cols;
+	 
 
    }
     

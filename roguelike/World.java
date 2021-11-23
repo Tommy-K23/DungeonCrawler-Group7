@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.io.PrintWriter;
 public class World
 {
-        String grid1 [] = 
+        String[] grid1 = 
         {
 "                       ############                     ",
 "                       ##      ^ ##                     ",
@@ -39,7 +39,7 @@ public class World
         };
 
 
-        String grid2 [] = 
+        String[] grid2 = 
         {
 "       #############################                                               ",
 "       ##          |___|          ##                                               ",
@@ -69,7 +69,7 @@ public class World
 
         };
         
-        String grid3 [] =
+        String[] grid3 =
         {
 
 "   #############################                                                          ",
@@ -105,15 +105,17 @@ public class World
         static Room currentRoom = null;
 	    int roomNum = 1;
 	    static Room r1;
-    	static Room r2;
+            static Room r2;
 	    static Room r3;
+	    int rows;
+	    int cols;
         public World() //Supposed to create the 3 levels, then set the current room to room 1.
         {
-                r1 = new Room(grid1);
+                r1 = new Room(grid1, 31, 58);
 
-                r2 = new Room(grid2);
+                r2 = new Room(grid2,24, 84 );
 
-                r3 = new Room(grid3);
+                r3 = new Room(grid3, 28, 91);
 
                 currentRoom = r1;
         }
@@ -163,11 +165,10 @@ public class World
         r3.save(pw);
         }
 
-	//compiler error with r1, r2, r3 being equalled as Scanners
         public World (Scanner in)
         {
-       Room r1 = new Room(grid1);
-       Room r2 = new Room(grid2);
-       Room r3 = new Room(grid3);
+       Room r1 = new Room(grid1, 31, 57);
+       Room r2 = new Room(grid2, 24, 84);
+       Room r3 = new Room(grid3, 28, 91);
         }
 }

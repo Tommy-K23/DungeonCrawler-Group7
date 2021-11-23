@@ -118,7 +118,9 @@ public class Game {
                 {     setStatus("There's nothing to use here...");
                         Terminal.pause(1.25); }
                 else {
-                        world.changeRoom(thing.getEndRoom());
+                      setStatus("Changing Rooms...");
+		      Terminal.pause(1.25); 
+		      world.changeRoom(thing.getEndRoom());
                 }
         }
 
