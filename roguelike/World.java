@@ -111,7 +111,7 @@ public class World
 	    int cols;
         public World() //Supposed to create the 3 levels, then set the current room to room 1.
         {
-                r1 = new Room(grid1, 31, 58);
+                r1 = new Room(grid1, 31, 56);
 
                 r2 = new Room(grid2,24, 84 );
 

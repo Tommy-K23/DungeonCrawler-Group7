@@ -18,9 +18,16 @@ public class Game {
         private World world;
         PrintWriter pw =null;
         public Game() {
+                Terminal.warpCursor(21, 0);
+                String name = Terminal.getLine("What is your name? ");
+                Terminal.warpCursor(21, 0);
+                String profession = Terminal.getLine("What is your profession? ");
+                Terminal.warpCursor(21, 0);
                 world = new World();
                 room = world.getCurrentRoom();
                 player = new Player(room.getPlayerStart());
+                player.setName(name);
+                player.setProfession(profession);
                 boxes = room.getBoxes();
                 enemies = room.getEnemies();
                 teleporters = room.getTeleporters();

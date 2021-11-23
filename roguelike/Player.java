@@ -5,8 +5,9 @@ import java.util.Scanner;
 import java.io.PrintWriter;
 public class Player extends Character {
     private Inventory items;
-    private static String name;
-
+    private String name;
+    private String profession;
+    
     public Player(Position start) {
         // our starting details
         super(start.getRow(), start.getCol(), '@', Color.CYAN, 50);
@@ -19,12 +20,8 @@ public class Player extends Character {
         items.addAndEquip(new Item(ItemType.Weapon, "Broken Beaker", 5, 5, 7));
         items.addAndEquip(new Item(ItemType.Armor, "Stained Linens", 10, 10, 3));
         items.add(new Item(ItemType.Other,"Overpriced Tech", 8, 200, 0));
-        Terminal.warpCursor(55, 0);
-        String name = Terminal.getLine("What is your name? ");
-        Terminal.warpCursor(55, 0);
-        String profession = Terminal.getLine("What is your profession? ");
-        Terminal.warpCursor(55, 0);
     }
+
     @Override
     public void save(PrintWriter pw)
     {
@@ -73,9 +70,21 @@ public class Player extends Character {
         }
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String getName() {
         return name;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getProfession() {
+        return profession;
     }
 
     @Override
