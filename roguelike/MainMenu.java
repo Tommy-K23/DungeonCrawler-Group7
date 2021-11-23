@@ -146,13 +146,12 @@ public class MainMenu
                                 game = new Game(in);
                                 in.close();
                                 game.run();
-                                break;
                                 }
-                                catch (java.io.FileNotFoundException e)
+                                catch (Exception e)
                                 {
                                 printStatus("File not Found!");
-                                break;
                                 }
+                                break;
 
                         case 3:
                                 printStatus("This game was made by Ethan, Ashley, and Thomas. It is about a scientist trying to escape from his lab after a series of accidents in the facility.");
