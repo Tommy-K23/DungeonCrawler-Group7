@@ -136,8 +136,10 @@ public class World
                 {currentRoom=r3;}
 		
 		if (x>3)
-		{//run endCredits method
+		{
+        //run endCredits method
 		}
+
         }
 
 
@@ -151,7 +153,7 @@ public class World
 
                 if (currentRoom==r3)
                 {return 3;}
-
+        return 4;
         }
 
         public void save(PrintWriter pw)
@@ -164,8 +166,8 @@ public class World
 	//compiler error with r1, r2, r3 being equalled as Scanners
         public World (Scanner in)
         {
-       // r1 = new Room(in);
-       // r2 = new Room(in);
-       // r3 = new Room(in);
+       Room r1 = new Room(grid1);
+       Room r2 = new Room(grid2);
+       Room r3 = new Room(grid3);
         }
 }

@@ -1,7 +1,8 @@
 
 import java.util.ArrayList;
 import ansi_terminal.*;
-
+import java.util.Scanner;
+import java.io.PrintWriter;
 
 public class MainMenu
 {
@@ -40,7 +41,7 @@ public class MainMenu
         int cursorCol=48;
         String status="";
         boolean quit = false;
-
+        Game game = null;
 
         public MainMenu()
         {}
@@ -132,17 +133,29 @@ public class MainMenu
                                 Terminal.warpCursor(21, 0);
                                 String profession = Terminal.getLine("Hello, " + name + "! What is your profession? ");
                                 Terminal.warpCursor(21, 0);*/
-                                Game game = new Game();
+                                game = new Game();
                                 game.run();
                                 drawMap();
                                 break;
 
                         case 2:
-                                printStatus("Under construction!");
+                                
+                                try 
+                                {
+                                Scanner in = new Scanner("save.txt");
+                                game = new Game(in);
+                                in.close();
+                                game.run();
                                 break;
+                                }
+                                catch (java.io.FileNotFoundException e)
+                                {
+                                printStatus("File not Found!");
+                                break;
+                                }
 
                         case 3:
-                                printStatus("Under construction!");
+                                printStatus("This game was made by Ethan, Ashley, and Thomas. It is about a scientist trying to escape from his lab after a series of accidents in the facility.");
                                 break;
 
                         case 4:

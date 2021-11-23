@@ -16,8 +16,7 @@ public class Game {
         private ArrayList<Teleporter> teleporters;
         private ArrayList<Enemy> boss;
         private World world;
-        Scanner in = new Scanner(new File ("save.txt"));
-
+        PrintWriter pw =null;
         public Game() {
                 world = new World();
                 room = world.getCurrentRoom();
@@ -53,35 +52,31 @@ public class Game {
 
         //Saves the game to a file, "save.txt"
         public void save() {
-            try { 
-                File save = new File ("save.txt");
-                PrintWriter pw = new PrintWriter(save);
-                world.save(pw);//calls world save, which calls rooms 1,2, and 3, to save. This in turn should save each of their respective boxes, and enemies. Player.save should be called separately.
-                player.save(pw);
+                try{
+                        if(pw==null)
+                        {
+                                pw = new PrintWriter("save.txt");
+                        }
 
-                pw.close();//MUST CLOSE FILE PROPERLY WHEN DONE
-            } catch (FileNotFoundException e) {
-                System.out.print("Could not load save file.\n\r");
-            }
+                        world.save(pw);//calls world save, which calls rooms 1,2, and 3, to save. This in turn should save each of their respective boxes, and enemies. Player.save should be called separately.
+                        player.save(pw);
+
+                        pw.close();//MUST CLOSE FILE PROPERLY WHEN DONE
+                } catch (FileNotFoundException e) {
+                        System.out.print("Could not load save file.\n\r");
+                }
         }
 
         public Game (Scanner in)//Load the game from a text save file, NEEDS A TRY CATCH BLOCK.
-	    {
-        try{
-        world = new World(in);
-        Player player = new Player(in);
-        Room r = world.getCurrentRoom();
-        boxes = world.getCurrentRoom().getBoxes();
-        enemies = r.getEnemies();
-        teleporters = room.getTeleporters();
-
-        in.close();//MUST CLOSE FILE PROPERLY WHEN DONE
-        }
-
-        catch(FileNotFoundException e)
         {
-        System.out.print("Could not Find save file.");
-        }
+
+                        world = new World(in);
+                        Player player = new Player(in);
+                        Room r = world.getCurrentRoom();
+                        boxes = world.getCurrentRoom().getBoxes();
+                        enemies = r.getEnemies();
+                        teleporters = room.getTeleporters();
+
         }
 
 
@@ -118,15 +113,15 @@ public class Game {
         }
 
         private void teleport() {
-	     Teleporter thing = checkForTeleport();
-	     if (thing == null) 
-	     {     setStatus("There's nothing to use here...");
-		   Terminal.pause(1.25); }
-	     else {
-		  world.changeRoom(teleporters.getEndRoom());
-	     }
-	}
- 
+                Teleporter thing = checkForTeleport();
+                if (thing == null) 
+                {     setStatus("There's nothing to use here...");
+                        Terminal.pause(1.25); }
+                else {
+                        world.changeRoom(thing.getEndRoom());
+                }
+        }
+
         // code for when the player tries to drop an item
         private void drop() {
                 if (checkForBox() == null) {
@@ -170,9 +165,9 @@ public class Game {
                                 redrawMapAndHelp();
                                 break;
                         case f:
-                  		teleport();              
+                                teleport();              
                                 redrawMapAndHelp();
-				break;
+                                break;
 
                                 // handle movement
                         case a: player.move(0, -1, room);
