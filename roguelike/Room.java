@@ -91,12 +91,12 @@ public class Room {
         return enemies;
     }
     // returns a boss for the final map
-    public ArrayList<Enemy> getBoss() {
-       ArrayList<Enemy> boss = new ArrayList<Enemy>();
+    public ArrayList<Boss> getBoss() {
+       ArrayList<Boss> boss = new ArrayList<Boss>();
        for (int row = 0; row <rows; row++){
            for (int col = 0; col < cols; col++){
 	       if (grid[row].charAt(col) == '&'){
-		   boss.add(new Enemy("Chicken Chimera", row, col, 40, 10, 15));
+		   boss.add(new Boss("Chicken Chimera", row, col, 40, 10, 15));
                }
            }
        }

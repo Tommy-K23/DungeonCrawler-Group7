@@ -19,7 +19,7 @@ public class Enemy extends Character {
                 this.battleActive = false;
                 rng = new Random();
         }
-
+	
         @Override
                 public int getDamage() {
                         return damage;

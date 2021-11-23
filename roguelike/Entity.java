@@ -24,7 +24,10 @@ public class Entity {
     public void setPosition(int row, int col) {
         position = new Position(row, col);
     }
-
+   
+    public void setPosition(Position position){
+	this.position = position;
+    }
     // get the position of this entity
     public Position getPosition() {
         return position;
@@ -56,6 +59,7 @@ public class Entity {
         return position.getCol();
     }
 
+   
     // translate the entity in space, unless it would hit a wall
     public boolean move(int rowChange, int colChange, Room room) {
         // find new position

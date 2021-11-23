@@ -14,7 +14,7 @@ public class Game {
         private ArrayList<Box> boxes;
         private ArrayList<Enemy> enemies;
         private ArrayList<Teleporter> teleporters;
-        private ArrayList<Enemy> boss;
+        private ArrayList<Boss> boss;
         private World world;
 	private String name;
 	private String profession;
@@ -26,19 +26,20 @@ public class Game {
                 profession = Terminal.getLine("What is your profession? ");
                 Terminal.warpCursor(21, 0);
 		world = new World();
+ 		room = world.getCurrentRoom();
+		player = new Player(room.getPlayerStart());
+                player.setName(name);
+                player.setProfession(profession);
 		setPlaces();
+		
         }
 
 	private void setPlaces() {        	   
-                room = world.getCurrentRoom();
-                player = new Player(room.getPlayerStart());
-                player.setName(name);
-                player.setProfession(profession);
+		player.setPosition(room.getPlayerStart());
                 boxes = room.getBoxes();
                 enemies = room.getEnemies();
                 teleporters = room.getTeleporters();
                 boss = room.getBoss();
-                world = new World();
 	}
 
         // prints a help menu to the left of the map
@@ -131,11 +132,11 @@ public class Game {
                 {     setStatus("There's nothing to use here...");
                         Terminal.pause(1.25); }
                 else {
-                      setStatus("Changing Rooms...");
-		      Terminal.pause(1.25); 
+                      setStatus("Changing Rooms..." + world.getRoomNum());
+		      Terminal.pause(1.25);
 		      world.changeRoom(world.getRoomNum()+1);
+		      room = world.getCurrentRoom();
 		      setPlaces();
-		     // room = world.getCurrentRoom();
                 }
         }
 
@@ -242,18 +243,27 @@ public class Game {
 
                 // look for an enemy that is close
                 Enemy opponent = null;
+		Boss bigGuy = null;
                 for (Enemy enemy : enemies) {
                         if (playerLocation.isAdjacent(enemy.getPosition())) {
                                 opponent = enemy;
                         }
                 }
+		for (Boss boss : boss) {
+			if (playerLocation.isAdjacent(boss.getPosition())) {
+				bigGuy = boss;
+			}
+		}
 
                 // now do the battle
                 if (opponent != null) {
                         opponent.setBattleActive();
                         return player.fight(opponent, room, enemies);
                 }
-
+		if (bigGuy != null) {
+			bigGuy.setBattleActive();
+			return player.fight(bigGuy, room, enemies);
+		}
                 return true;
         }
 
@@ -263,6 +273,7 @@ public class Game {
                 redrawMapAndHelp();
                 boolean playing = true;
                 while (playing) {
+		    if(world.getRoomNum() < 4){
                         // draw the entities
                         for (Box box : boxes) {
                                 box.draw();
@@ -274,7 +285,10 @@ public class Game {
 				tp.draw();
 			}
                         player.draw();
-
+			for (Boss a : boss){
+				a.draw();
+			}
+                   }
                         // read a key from the user
                         Terminal.warpCursor(room.getRows() + 1, 0);
                         Key key = Terminal.getKey();
@@ -303,6 +317,7 @@ public class Game {
 			if (tpHere != null) {
 				setStatus("Press f to change rooms.");
 			}
+		    
                 }
         }
 }
