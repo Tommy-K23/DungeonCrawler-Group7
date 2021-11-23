@@ -19,11 +19,11 @@ public class Player extends Character {
         items.addAndEquip(new Item(ItemType.Weapon, "Broken Beaker", 5, 5, 7));
         items.addAndEquip(new Item(ItemType.Armor, "Stained Linens", 10, 10, 3));
         items.add(new Item(ItemType.Other,"Overpriced Tech", 8, 200, 0));
-        Terminal.warpCursor(55, 0);
-        String name = Terminal.getLine("What is your name? ");
-        Terminal.warpCursor(55, 0);
-        String profession = Terminal.getLine("What is your profession? ");
-        Terminal.warpCursor(55, 0);
+//        Terminal.warpCursor(55, 0);
+//        String name = Terminal.getLine("What is your name? ");
+//        Terminal.warpCursor(55, 0);
+//        String profession = Terminal.getLine("What is your profession? ");
+//        Terminal.warpCursor(55, 0);
     }
     @Override
     public void save(PrintWriter pw)
