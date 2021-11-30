@@ -132,11 +132,19 @@ public class Game {
                 {     setStatus("There's nothing to use here...");
                         Terminal.pause(1.25); }
                 else {
-                      setStatus("Changing Rooms..." + world.getRoomNum());
-		      Terminal.pause(1.25);
-		      world.changeRoom(world.getRoomNum()+1);
-		      room = world.getCurrentRoom();
-		      setPlaces();
+                      if (world.getRoomNum() < 3){
+		      	setStatus("Changing Rooms..." + world.getRoomNum());
+		      	Terminal.pause(1.25);
+		      	world.changeRoom(world.getRoomNum()+1);
+		      	room = world.getCurrentRoom();
+		      	setPlaces();
+		      }else{
+			setStatus("You find a ladder to a secret tunnel...");
+			Terminal.pause(1.25);
+			Terminal.clear();
+			EndScreen end = new EndScreen();
+			end.run();
+		      }	
                 }
         }
 
