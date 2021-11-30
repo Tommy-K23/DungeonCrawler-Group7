@@ -144,7 +144,8 @@ public class MainMenu
                                 }
                                 catch (Exception e)
                                 {
-                                printStatus("File not Found!");
+                                System.out.print(e);
+				//printStatus("File not Found!");
                                 }
                                 break;
 
