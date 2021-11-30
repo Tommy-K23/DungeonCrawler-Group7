@@ -191,10 +191,15 @@ public class Game {
                                 redrawMapAndHelp();
                                 break;
                         case f:
-                                teleport();              
+                                if (world.getRoomNum() < 3){
+				teleport();              
                                 redrawMapAndHelp();
 			        break;
-
+				}else{
+				teleport();
+				redrawMapAndHelp();
+				return false;
+				}
                                 // handle movement
                         case a: player.move(0, -1, room);
                                 break;
