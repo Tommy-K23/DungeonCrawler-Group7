@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import ansi_terminal.*;
 import java.util.Scanner;
 import java.io.PrintWriter;
-
+import java.io.File;
 public class MainMenu
 {
         int option;
@@ -137,14 +137,18 @@ public class MainMenu
                                 
                                 try 
                                 {
-                                Scanner in = new Scanner("save.txt");
+                                File f = new File("save.txt");
+                                Scanner in = new Scanner(f);
                                 game = new Game(in);
                                 in.close();
                                 game.run();
                                 }
                                 catch (Exception e)
                                 {
-                                System.out.print(e);
+                                Terminal.cookedMode();
+                                e.printStackTrace();
+                                System.exit(0);
+                                //System.out.print(e);
 				//printStatus("File not Found!");
                                 }
                                 break;

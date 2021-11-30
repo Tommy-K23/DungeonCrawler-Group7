@@ -44,9 +44,15 @@ public class Entity {
 
     public Entity (Scanner in)//Load
     {
-        in.nextLine();
-        int row=in.nextInt();
-        int col=in.nextInt();
+        String test = in.nextLine();
+        System.out.print("Test= "+test+"\n");
+        //int row=in.nextInt();
+        int row=0;
+        int col=0;
+        String r =in.next();
+        System.out.print(r);
+        Terminal.pause(2);
+        //int col=in.nextInt();
         position = new Position(row, col);
         display=in.next().charAt(0);
     }
