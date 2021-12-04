@@ -50,7 +50,7 @@ public class Entity {
         int row=0;
         int col=0;
         String r =in.next();
-        System.out.print(r);
+        System.out.print("expecting row for entity: "+r+"\n");
         Terminal.pause(2);
         //int col=in.nextInt();
         position = new Position(row, col);

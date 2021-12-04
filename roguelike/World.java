@@ -186,8 +186,8 @@ public class World
 
         public World (Scanner in)
         {
-       Room r1 = new Room(grid1, 31, 57);
-       Room r2 = new Room(grid2, 24, 84);
-       Room r3 = new Room(grid3, 28, 91);
+       Room r1 = new Room(grid1 , 31 , 57 , in);
+       Room r2 = new Room(grid2 , 24 , 84 , in);
+       Room r3 = new Room(grid3 , 28 , 91 , in);
         }
 }
