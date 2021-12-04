@@ -159,14 +159,6 @@ public class World
 
         public static int getRoomNum()//returns the level number for the current room.
         {
-               // if (currentRoom==r1)
-               // {return 1;}
-
-               // if(currentRoom==r2)
-               // {return 2;}
-
-               // if (currentRoom==r3)
-               // {return 3;}
         return roomNum;
         }
 
@@ -179,6 +171,7 @@ public class World
 
         public void save(PrintWriter pw)
         {
+        pw.println(getRoomNum);
         r1.save(pw);
         r2.save(pw);
         r3.save(pw);
@@ -186,6 +179,7 @@ public class World
 
         public World (Scanner in)
         {
+       changeRoom(in.nextInt());
        Room r1 = new Room(grid1 , 31 , 57 , in);
        Room r2 = new Room(grid2 , 24 , 84 , in);
        Room r3 = new Room(grid3 , 28 , 91 , in);

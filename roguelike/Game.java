@@ -81,7 +81,7 @@ public class Game {
                 }
         }
 
-        public Game (Scanner in)//Load the game from a text save file, NEEDS A TRY CATCH BLOCK.
+        public Game (Scanner in)//Load the game from a text save file
         {
 
                         world = new World(in);
@@ -284,6 +284,7 @@ public class Game {
         public void run() {
                 // draw these for the first time now
                 redrawMapAndHelp();
+                setPlaces();
                 boolean playing = true;
                 while (playing) {
 		    if(world.getRoomNum() < 4){

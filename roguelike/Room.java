@@ -13,6 +13,9 @@ public class Room {
         private int cols;
         int roomNum = 1;
         boolean load;
+        protected ArrayList<Box> boxes=null;
+        protected ArrayList<Enemy> enemies=null;
+        protected ArrayList<Boss> boss=null;
 
         public Room(String grid[], int rows, int cols) {
                 // this initializes the grid for room one
@@ -27,23 +30,20 @@ public class Room {
         {
                 // we need to save boxes and enemies.
                 pw.println("Saving room below.");
-                ArrayList<Box> boxes = getBoxes();
                 int boxArraySize=boxes.size();
                 pw.println(boxArraySize);
                 for (Box box : boxes)
                 {box.save(pw);}
 
-                ArrayList<Enemy> enemies = getEnemies();
                 int enemyArraySize=enemies.size();
                 pw.println(enemyArraySize);
                 for (Enemy enemy : enemies)
                 {enemy.save(pw);}
 
 
-                ArrayList<Boss> boss = getBoss();
                 int bossArraySize=boss.size();
                 pw.println(bossArraySize);
-                for (Boss boss : bosses)
+                for (Boss boss : boss)
                 {boss.save(pw);}
         }
 
@@ -56,14 +56,14 @@ public class Room {
                 load = true;
                 in.nextLine();
                 int boxArraySize=in.nextInt();
-                ArrayList<Box> boxes = new ArrayList<Box>();
+                boxes = new ArrayList<Box>();
                 for (int a = 0; a < boxArraySize; a++)
                 {
                         Box currentLoadBox = new Box(in);
                         boxes.add(currentLoadBox);
                 }
                 int enemyArraySize=in.nextInt();
-                ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+                enemies = new ArrayList<Enemy>();
                 for (int b = 0; b < enemyArraySize;b++)
                 {
                         Enemy currentLoadEnemy = new Enemy(in);
@@ -71,11 +71,11 @@ public class Room {
                 }
 
                 int bossArraySize = in.nextInt();
-                ArrayList<Boss> bosses = new ArrayList<Boss>();
+                boss = new ArrayList<Boss>();
                 for (int c = 0; c < bossArraySize; c++)
                 {
                         Boss currentLoadBoss = new Boss(in);
-                        bosses.add(currentLoadBoss);
+                        boss.add(currentLoadBoss);
                 }
         }
 
@@ -96,7 +96,7 @@ public class Room {
         // the room geometry for where the boxes make sense to be
         public ArrayList<Box> getBoxes() {
 
-                if(load == false)
+                if(boxes==null)
                 {
                         ArrayList<Box> boxes = new ArrayList<Box>();
                         for (int row = 0; row < rows; row++) {
@@ -129,7 +129,7 @@ public class Room {
         // returns a set of enemies from this map, similarly to the boxes above
         public ArrayList<Enemy> getEnemies() {
 
-                if(load==false)
+                if(enemies==null)
                 {
                         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
                         for (int row = 0; row < rows; row++) {
@@ -146,13 +146,14 @@ public class Room {
         }
         // returns a boss for the final map
         public ArrayList<Boss> getBoss() {
-                if(load==false)
+                if(boss==null)
                 {
                         ArrayList<Boss> boss = new ArrayList<Boss>();
                         for (int row = 0; row <rows; row++){
                                 for (int col = 0; col < cols; col++){
                                         if (grid[row].charAt(col) == '&'){
-                                                boss.add(new Boss("Chicken Chimera", row, col, 40, 10, 15));
+                                                Boss chickenBoss=new Boss("Chicken Chimera",row,col,40,10,15);
+                                                boss.add(chickenBoss);
                                         }
                                 }
                         }
