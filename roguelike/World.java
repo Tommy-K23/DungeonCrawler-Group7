@@ -171,7 +171,7 @@ public class World
 
         public void save(PrintWriter pw)
         {
-        pw.println(getRoomNum);
+        pw.println(getRoomNum());
         r1.save(pw);
         r2.save(pw);
         r3.save(pw);

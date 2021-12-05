@@ -13,9 +13,9 @@ public class Room {
         private int cols;
         int roomNum = 1;
         boolean load;
-        protected ArrayList<Box> boxes=null;
-        protected ArrayList<Enemy> enemies=null;
-        protected ArrayList<Boss> boss=null;
+        protected ArrayList<Box> boxes;
+        protected ArrayList<Enemy> enemies;
+        protected ArrayList<Boss> boss;
 
         public Room(String grid[], int rows, int cols) {
                 // this initializes the grid for room one
@@ -53,7 +53,7 @@ public class Room {
                 this.grid = grid;
                 this.rows=rows;
                 this.cols=cols;
-                load = true;
+                load = true; //do we need two load variables?
                 in.nextLine();
                 int boxArraySize=in.nextInt();
                 boxes = new ArrayList<Box>();
@@ -98,7 +98,7 @@ public class Room {
 
                 if(boxes==null)
                 {
-                        ArrayList<Box> boxes = new ArrayList<Box>();
+                        boxes = new ArrayList<Box>();
                         for (int row = 0; row < rows; row++) {
                                 for (int col = 0; col < cols; col++) {
                                         if (grid[row].charAt(col) == '^') {
@@ -131,7 +131,7 @@ public class Room {
 
                 if(enemies==null)
                 {
-                        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+                        enemies = new ArrayList<Enemy>();
                         for (int row = 0; row < rows; row++) {
                                 for (int col = 0; col < cols; col++) {
                                         if (grid[row].charAt(col) == '%') {
@@ -148,7 +148,7 @@ public class Room {
         public ArrayList<Boss> getBoss() {
                 if(boss==null)
                 {
-                        ArrayList<Boss> boss = new ArrayList<Boss>();
+                        boss = new ArrayList<Boss>();
                         for (int row = 0; row <rows; row++){
                                 for (int col = 0; col < cols; col++){
                                         if (grid[row].charAt(col) == '&'){
