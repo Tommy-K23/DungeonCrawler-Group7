@@ -1,6 +1,10 @@
-// Inventory.java
-// allows for storing some number of items for the player
-
+/**
+ * This class acts as an <b>Item</b> storage system for the <b>Player</b>.
+ * The player can equip weapons and armor, add new items,
+ * drop items and view their <b>Inventory</b>.
+ * Players can only have one inventory, and each inventory has a
+ * maximum carry weight.
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,12 +21,24 @@ public class Inventory {
     // the max weight limit for the player here
     private int maxWeight;
 
+	/**
+	 * Constructor for a new <b>Inventory</b>.
+	 * @param maxWeight the maximum weight the inventory can hold.
+	 */
     public Inventory(int maxWeight) {
         items = new ArrayList<Item>();
         this.maxWeight = maxWeight;
     }
 
-    // returns true on success, false when full
+    /**
+	 * This adds a new <b>Item</b> to the <b>Inventory</b>.
+	 * New items will not be added if the item will cause the
+	 * inventory's weight to exceed the maximum allowance.
+	 * @param item the item that is being added.
+	 *
+	 * @return true if the item was added successfully and
+	 * false if not.
+	 */
     public boolean add(Item item) {
         if ((item.getWeight() + totalWeight()) > maxWeight) {
             return false;
@@ -32,8 +48,11 @@ public class Inventory {
         }
     }
 
-    // this method not only adds the item, but equips it into the correct slot
-    // it is used for setting up the player's starting gear
+    /**
+	 * In addition to adding an <b>Item</b> to the inventory, if it is of type
+	 * Weapon or Armor, it will equip it into the proper "slot".
+	 * @param item the item that is being added.
+	 */
     public void addAndEquip(Item item) {
         items.add(item);
 
@@ -44,16 +63,29 @@ public class Inventory {
         }
     }
 
-    // get the equipped weapon and armor
+    /**
+	 * Gets the <b>equippedWeapon</b>.
+	 *
+	 * @return the equipped weapon.
+	 */
     public Item getEquippedWeapon() {
         return equippedWeapon;
     }
-
+	
+	/**
+	 * Gets the <b>equippedArmor</b>.
+	 *
+	 * @return the equipped armor.
+	 */
     public Item getEquippedArmor() {
         return equippedArmor;
     }
 
-    // returns the total weight of all items stored
+    /**
+	 * Gets the accumulated weight of all of the items in the <b>Inventory</b>.
+	 * 
+	 * @return the total weight of the inventory.
+	 */
     public int totalWeight() {
         int total = 0;
         for (Item i : items) {
@@ -62,8 +94,13 @@ public class Inventory {
         return total;
     }
 
-    // print all of the items in the list, that match they given type (can be null)
-    // returns the number of items matching they type
+	/**
+	 * Prints all of the items in the <b>Inventory</b> that match the given <b>ItemType</b>
+	 * (can be null).
+	 * @param filter the type of an item.
+	 *
+	 * @return the number of items matching the type.
+	 */
     private int print(ItemType filter) {
         // clear the terminal so we print over all else
         Terminal.clear();
@@ -95,19 +132,27 @@ public class Inventory {
         return num;
     }
 
-    // stay here until the user is ready to go back
+    /**
+	 * Will make the player stay on the current screen until a key press.
+	 */
     public void pressAnyKey() {
         System.out.printf("\n\rPress any key to return...\n\r");
         Terminal.getKey();
     }
 
-    // print all of the items in the list
+    /**
+	 * Prints all of the items in the <b>Inventory</b>.
+	 */
     public void print() {
         print(null);
         pressAnyKey();
     }
 
-    // drop an item from the inventory, return what was dropped
+    /**
+	 * Allows the player to drop an item from their <b>Inventory</b>.
+	 *
+	 * @return the item the player wishes to drop.
+	 */
     public Item drop() {
         Item toDrop = pickItem(null);
         if (toDrop != null) {
@@ -131,7 +176,12 @@ public class Inventory {
         return toDrop;
     }
 
-    // equip something
+    /**
+	 * Allows the player to equip an <b>Item</b>.
+	 * @param type the <b>ItemType</b> of an item.
+	 *
+	 * @return the item the player wishes to equip.
+	 */
     private Item equip(ItemType type) {
         Item thing = pickItem(type);
         if (thing != null) {
@@ -143,18 +193,26 @@ public class Inventory {
         return thing;
     }
 
-    // equip a weapon
+    /**
+	 * Allows the player to equip an item of type <b>Weapon</b>.
+	 */
     public void equipWeapon() {
         equippedWeapon = equip(ItemType.Weapon);
     }
 
-    // equip a piece of armor
+    /**
+	 * Allows the player to equip an item of type <b>Armor</b>.
+	 */
     public void equipArmor() {
         equippedArmor = equip(ItemType.Armor);
     }
 
-    // a method which allows users to choose an item
-    // this is private - only called by drop and equip
+	/**
+	 * Allows the player to choose an item from their <b>Inventory</b>.
+	 * @param filter the <b>ItemType</b> of an item.
+	 *
+	 * @return the item chosen.
+	 */
     private Item pickItem(ItemType filter) {
         // print all the matching items
         int options = print(filter);
@@ -197,7 +255,12 @@ public class Inventory {
             return items.get(realIndex);
         }
     }
-
+	
+	/**
+	 * Gets the number of items in the <b>Inventory</b>.
+	 *
+	 * @return the number of items.
+	 */
     public int getNumItems() {
         int numItems = 0;
         for (Item i : items) {
@@ -206,8 +269,14 @@ public class Inventory {
         return numItems;
     }
 
+	/**
+	 * Gets an item from the <b>Inventory</b> list.
+	 * @param i the index of the item.
+	 * 
+	 * @return the item indexed from the list.
+	 */
     public Item getItem(int i) {
-      Item p =items.get(i);
+      Item p = items.get(i);
       return p;
     }
 }

@@ -1,9 +1,18 @@
-// ItemGenerator.java
-// this class contains a static method for creating items randomly
-
+/**
+ * This class will generate a random <b>Item</b>. There are three types of items possible
+ * (Weapon, Armor, and Other). All items have a type, name, weight, value, and strength.
+ *
+ * @author AQ
+ */
 import java.util.Random;
 
 public class ItemGenerator {
+	
+	/**
+	 * This method is responsible for creating items.
+	 *
+	 * @return a randomly generated <b>Item</b>.
+	 */
     public static Item generate() {
         
         String[] weaponNames = {"Broken Beaker", "Rusty Pliers", "Scalpel", "Electric Prod"};
