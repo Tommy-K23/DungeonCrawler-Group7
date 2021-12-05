@@ -34,6 +34,9 @@
          public Boss (Scanner in)
          {
                  super (in);
+		 Terminal.warpCursor(2,100);
+		 System.out.print("1");
+		 Terminal.pause(2);
                  this.name=in.nextLine();
                  this.damage=in.nextInt();
                  this.protection = in.nextInt();

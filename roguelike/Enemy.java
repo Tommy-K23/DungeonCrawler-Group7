@@ -36,11 +36,17 @@ public class Enemy extends Character {
         public Enemy (Scanner in)
         {
                 super (in);
+		Terminal.warpCursor(2,100);
+		System.out.print("4");
+		Terminal.pause(2);
                 this.name=in.nextLine();
+		in.nextLine();
                 this.damage=in.nextInt();
                 this.protection = in.nextInt();
                 this.battleActive = false;
                 rng= new Random();
+		System.out.print(name);
+		Terminal.pause(2);
         }
         @Override
                 public int getProtection() {

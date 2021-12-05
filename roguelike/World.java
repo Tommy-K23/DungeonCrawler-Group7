@@ -172,10 +172,18 @@ public class World
         public void save(PrintWriter pw)
         {
         pw.println(getRoomNum());
-        r1.save(pw);
-        r2.save(pw);
-        r3.save(pw);
-        }
+	switch (getRoomNum()){
+	case 1:
+        	r1.save(pw);
+		break;
+	case 2:
+        	r2.save(pw);
+		break;
+	case 3:
+	        r3.save(pw);
+        	break;
+	}
+	}
 
         public World (Scanner in)
         {

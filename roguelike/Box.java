@@ -18,13 +18,28 @@ public class Box extends Entity {
                 
         public Box(Scanner in)//load
         {
-                super(in); 
-                ItemType type = ItemType.valueOf(in.nextLine());
+                super(in);
+		Terminal.warpCursor(2,100);
+		System.out.print("2");
+		Terminal.pause(2); 
+                //ItemType type = ItemType.valueOf(in.next().toUpperCase());
+		String value = in.nextLine();
                 String a=in.nextLine();
                 int b=in.nextInt();
                 int c=in.nextInt();
                 int d=in.nextInt();
-                this.item = new Item(type,a,b,c,d);
+		switch (value) {
+		case "Weapon":
+                	this.item = new Item(ItemType.Weapon,a,b,c,d);
+			break;
+		case "Armor":
+			this.item = new Item(ItemType.Armor,a,b,c,d);
+			break;
+		case "Other":
+			this.item = new Item(ItemType.Other,a,b,c,d);
+			break;
+		}
+		
         }
 
         @Override

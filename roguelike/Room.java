@@ -30,7 +30,7 @@ public class Room {
         {
                 // we need to save boxes and enemies.
                 pw.println("Saving room below.");
-                int boxArraySize=boxes.size();
+                int boxArraySize = boxes.size();
                 pw.println(boxArraySize);
                 for (Box box : boxes)
                 {box.save(pw);}
@@ -50,17 +50,27 @@ public class Room {
         public Room (String grid[], int rows, int cols, Scanner in)
         {
                 load=true;
+		Terminal.warpCursor(2,100);
+		System.out.print("7");
+		Terminal.pause(2);
                 this.grid = grid;
                 this.rows=rows;
                 this.cols=cols;
                 load = true; //do we need two load variables?
-                in.nextLine();
-                int boxArraySize=in.nextInt();
+                System.out.print(in.nextLine());//skips the first line in save.txt
+		Terminal.pause(2);
+		System.out.print(in.nextLine());//skips the second line in save.txt
+		Terminal.pause(2);
+                int boxArraySize = in.nextInt();
                 boxes = new ArrayList<Box>();
+		int counter = 0;
                 for (int a = 0; a < boxArraySize; a++)
                 {
                         Box currentLoadBox = new Box(in);
                         boxes.add(currentLoadBox);
+			counter++;
+			Terminal.warpCursor(2, 100);
+			System.out.print(counter);
                 }
                 int enemyArraySize=in.nextInt();
                 enemies = new ArrayList<Enemy>();

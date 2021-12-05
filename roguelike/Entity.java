@@ -44,17 +44,22 @@ public class Entity {
 
     public Entity (Scanner in)//Load
     {
-        String test = in.nextLine();
-        System.out.print("Test= "+test+"\n");
+        in.nextLine();
+	in.nextLine();
+	Terminal.warpCursor(2,100);
+	System.out.print("5");
+	Terminal.pause(2);
+        //System.out.print("Test= "+test+"\n");
         //int row=in.nextInt();
-        int row=0;
-        int col=0;
-        String r =in.next();
-        System.out.print("expecting row for entity: "+r+"\n");
+        int row= in.nextInt();
+        int col= in.nextInt();
+	in.nextLine();
+        String d = in.nextLine();
+	System.out.print(d + row + col);
         Terminal.pause(2);
         //int col=in.nextInt();
         position = new Position(row, col);
-        display=in.next().charAt(0);
+        display = d.charAt(0);
     }
 
     public int getRow() {

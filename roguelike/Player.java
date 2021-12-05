@@ -44,6 +44,9 @@ public class Player extends Character {
     public Player(Scanner in) 
     {
 	super(in);
+	Terminal.warpCursor(2,100);
+	System.out.print("6");
+	Terminal.pause(2);
     name=in.nextLine();
     int numItems=items.getNumItems();
     items = new Inventory(100);
