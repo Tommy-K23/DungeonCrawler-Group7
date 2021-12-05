@@ -53,8 +53,8 @@ public class Room {
                 this.grid = grid;
                 this.rows=rows;
                 this.cols=cols;
-                System.out.print(in.nextLine());//skips the first line in save.txt
-		        System.out.print(in.nextLine());//skips the second line in save.txt
+                in.nextLine();//skips the first line in save.txt
+		        in.nextLine();//skips the second line in save.txt
                 int boxArraySize = in.nextInt();
                 boxes = new ArrayList<Box>();
                 for (int a = 0; a < boxArraySize; a++)

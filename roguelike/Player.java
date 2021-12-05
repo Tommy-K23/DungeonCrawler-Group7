@@ -45,32 +45,23 @@ public class Player extends Character {
     public Player(Scanner in) 
     {
 	super(in);
-	
-    Terminal.warpCursor(2,100);
-	System.out.print("player ");
-	Terminal.pause(2);
-    
+    in.nextLine();
     this.name=in.nextLine();
-    Terminal.warpCursor(3,100);
-    System.out.print("name: "+name);
-    Terminal.pause(2);
-
+    this.profession=in.nextLine();
     int numItems=in.nextInt();
-    Terminal.warpCursor(3,100);
-    System.out.print("# of Items: "+numItems);
     Terminal.pause(2);
 
     items = new Inventory(100);
     for (int i=0;i<numItems;i++)
         {
-        ItemType itype= ItemType.valueOf(in.next());
+        String itypehold = in.next();
+        ItemType itype= ItemType.valueOf(itypehold);
+        in.nextLine();
         String iname=in.nextLine();
         int iweight = in.nextInt();
         int ivalue = in.nextInt();
         int istrength=in.nextInt();
         items.add(new Item(itype,iname,iweight,ivalue,istrength));
-        System.out.println("Item Created");
-        Terminal.pause(1);
         }
 
     }
