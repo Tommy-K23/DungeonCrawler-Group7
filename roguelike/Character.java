@@ -62,11 +62,8 @@ public abstract class Character extends Entity {
 	public Character(Scanner in)//load
 	{
 		super(in);
-		Terminal.warpCursor(2,100);
-		System.out.print("3");
-		Terminal.pause(2);
 		hp=in.nextInt();
-	}   
+    }   
 
 
     // this method performs one round of battle between two characters

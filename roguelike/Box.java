@@ -19,11 +19,7 @@ public class Box extends Entity {
         public Box(Scanner in)//load
         {
                 super(in);
-		Terminal.warpCursor(2,100);
-		System.out.print("2");
-		Terminal.pause(2); 
-                //ItemType type = ItemType.valueOf(in.next().toUpperCase());
-		String value = in.nextLine();
+		        String value = in.nextLine();
                 String a=in.nextLine();
                 int b=in.nextInt();
                 int c=in.nextInt();

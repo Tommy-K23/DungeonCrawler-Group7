@@ -5,8 +5,8 @@ import java.util.Scanner;
 import java.io.PrintWriter;
 public class Player extends Character {
     private Inventory items;
-    private String name;
-    private String profession;
+    protected String name;
+    protected String profession;
     
     public Player(Position start) {
         // our starting details
@@ -26,10 +26,11 @@ public class Player extends Character {
     public void save(PrintWriter pw)
     {
         super.save(pw);
-        pw.println(getName());
+        pw.println(name);
+        pw.println(profession);
         
         int numItems = items.getNumItems();
-
+        pw.println(numItems);
         for (int i = 0; i<numItems; i++)
         {
             pw.println(items.getItem(i).getType());
@@ -44,11 +45,21 @@ public class Player extends Character {
     public Player(Scanner in) 
     {
 	super(in);
-	Terminal.warpCursor(2,100);
-	System.out.print("6");
+	
+    Terminal.warpCursor(2,100);
+	System.out.print("player ");
 	Terminal.pause(2);
-    name=in.nextLine();
-    int numItems=items.getNumItems();
+    
+    this.name=in.nextLine();
+    Terminal.warpCursor(3,100);
+    System.out.print("name: "+name);
+    Terminal.pause(2);
+
+    int numItems=in.nextInt();
+    Terminal.warpCursor(3,100);
+    System.out.print("# of Items: "+numItems);
+    Terminal.pause(2);
+
     items = new Inventory(100);
     for (int i=0;i<numItems;i++)
         {
@@ -58,6 +69,8 @@ public class Player extends Character {
         int ivalue = in.nextInt();
         int istrength=in.nextInt();
         items.add(new Item(itype,iname,iweight,ivalue,istrength));
+        System.out.println("Item Created");
+        Terminal.pause(1);
         }
 
     }

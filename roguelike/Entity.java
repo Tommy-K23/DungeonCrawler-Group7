@@ -45,19 +45,11 @@ public class Entity {
     public Entity (Scanner in)//Load
     {
         in.nextLine();
-	in.nextLine();
-	Terminal.warpCursor(2,100);
-	System.out.print("5");
-	Terminal.pause(2);
-        //System.out.print("Test= "+test+"\n");
-        //int row=in.nextInt();
+	    in.nextLine();
         int row= in.nextInt();
         int col= in.nextInt();
-	in.nextLine();
+	    in.nextLine();
         String d = in.nextLine();
-	System.out.print(d + row + col);
-        Terminal.pause(2);
-        //int col=in.nextInt();
         position = new Position(row, col);
         display = d.charAt(0);
     }
