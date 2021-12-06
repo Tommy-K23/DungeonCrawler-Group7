@@ -39,6 +39,7 @@ public class Entity {
         pw.println(getRow());
         pw.println(getCol());
         pw.println(display);
+	//pw.println(color);
     }
 
 
@@ -50,8 +51,10 @@ public class Entity {
         int col= in.nextInt();
 	    in.nextLine();
         String d = in.nextLine();
+	//String clr = in.nextLine();
         position = new Position(row, col);
         display = d.charAt(0);
+
     }
 
     public int getRow() {

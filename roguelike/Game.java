@@ -85,10 +85,10 @@ public class Game {
         {
 
                         world = new World(in);
-                        Player player = new Player(in);
-                        Room r = world.getCurrentRoom();
+                        player = new Player(in);
+                        room = world.getCurrentRoom();
                         boxes = world.getCurrentRoom().getBoxes();
-                        enemies = r.getEnemies();
+                        enemies = room.getEnemies();
                         teleporters = room.getTeleporters();
 
         }
