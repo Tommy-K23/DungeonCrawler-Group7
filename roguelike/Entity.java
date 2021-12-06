@@ -39,12 +39,12 @@ public class Entity {
         pw.println(getRow());
         pw.println(getCol());
         pw.println(display);
-	//pw.println(color);
     }
 
 
-    public Entity (Scanner in)//Load
+    public Entity (Scanner in , Color color)//Load
     {
+        this.color = color;
         in.nextLine();
 	    in.nextLine();
         int row= in.nextInt();

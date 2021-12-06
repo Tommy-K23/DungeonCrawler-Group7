@@ -33,13 +33,17 @@
 
          public Boss (Scanner in)
          {
-                 super (in);
-		 Terminal.warpCursor(2,100);
-		 System.out.print("1");
-		 Terminal.pause(2);
-                 this.name=in.nextLine();
-                 this.damage=in.nextInt();
-                 this.protection = in.nextInt();
+                 super (in, Color.RED);
+                 in.nextLine();
+                 name=in.nextLine();
+                 this.name=name;
+                 
+                 damage=in.nextInt();
+                 this.damage=damage;
+                    
+                 protection=in.nextInt();
+                 this.protection = protection;
+
                  this.battleActive = false;
                  rng= new Random();
          }

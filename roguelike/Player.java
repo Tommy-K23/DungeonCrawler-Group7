@@ -44,7 +44,7 @@ public class Player extends Character {
 
     public Player(Scanner in) 
     {
-	super(in);
+	super(in, Color.CYAN);
     in.nextLine();
     this.name=in.nextLine();
     this.profession=in.nextLine();

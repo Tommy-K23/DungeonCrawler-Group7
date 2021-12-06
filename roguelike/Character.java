@@ -59,9 +59,9 @@ public abstract class Character extends Entity {
                 pw.println(hp);
         }
 
-	public Character(Scanner in)//load
+	public Character(Scanner in, Color color)//load
 	{
-		super(in);
+		super(in , color);
 		hp=in.nextInt();
     }   
 

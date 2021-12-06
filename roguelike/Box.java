@@ -11,14 +11,14 @@ public class Box extends Entity {
 
         // add a box with a given item in it
         public Box(int row, int col, Item item) {
-                super(row, col, '^', Color.MAGENTA);
+                super(row, col, '^', Color.YELLOW);
                 this.item = item;
         }
 
                 
         public Box(Scanner in)//load
         {
-                super(in);
+                super(in, Color.YELLOW);
 		        String value = in.nextLine();
                 String a=in.nextLine();
                 int b=in.nextInt();

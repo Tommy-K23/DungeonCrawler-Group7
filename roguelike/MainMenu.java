@@ -130,6 +130,7 @@ public class MainMenu
                         case 1:
                                 game = new Game();
                                 game.run();
+                                Terminal.clear();
                                 drawMap();
                                 break;
 
@@ -142,6 +143,8 @@ public class MainMenu
                                 game = new Game(in);
                                 in.close();
                                 game.run();
+                                Terminal.clear();
+                                drawMap();
                                 }
                                 catch (Exception e)
                                 {

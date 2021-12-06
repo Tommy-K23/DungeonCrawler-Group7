@@ -35,7 +35,7 @@ public class Enemy extends Character {
 
         public Enemy (Scanner in)
         {
-                super (in);
+                super (in , Color.RED);
                 this.name=in.nextLine();
 		        in.nextLine();
                 this.damage=in.nextInt();
