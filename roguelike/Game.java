@@ -339,7 +339,7 @@ public class Game {
                         if (checkBattles() == false) {
 				Terminal.warpCursor(0,0);
                                 setStatus("You have been killed :(\n\r");
-				Terminal.pause(1.25);
+				Terminal.pause(2.25);
                                 playing = false;
                         }
 
