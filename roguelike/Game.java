@@ -24,12 +24,21 @@ public class Game {
                 name = Terminal.getLine("What is your name? ");
                 Terminal.warpCursor(21, 0);
                 profession = Terminal.getLine("What is your profession? ");
-                Terminal.warpCursor(21, 0);
+                Terminal.warpCursor(21, 0);	
 		world = new World();
  		room = world.getCurrentRoom();
 		player = new Player(room.getPlayerStart());
                 player.setName(name);
                 player.setProfession(profession);
+		Terminal.warpCursor(0,0);
+		setStatus("You are employee 12721 of Blanket Labs where you're role is: " + profession);
+		Terminal.pause(5);
+		setStatus("You've been going about your day, until you hear a large BOOM from somewhere far.");
+		Terminal.pause(4.3);
+		setStatus("You ignore it for a while, not the first time you've heard an explosion in a science lab");
+		Terminal.pause(4.5);
+		setStatus("But soon you start to hear groaning and screams for help. That's when you see them. The monsters...");
+		Terminal.pause(7);
 		setPlaces();
 		
         }
@@ -132,15 +141,21 @@ public class Game {
                 {     setStatus("There's nothing to use here...");
                         Terminal.pause(1.25); }
                 else {
-                      if (world.getRoomNum() < 3){
-		      	setStatus("Changing Rooms...");
-		      	Terminal.pause(1.25);
+                      if (world.getRoomNum() == 1){
+		      	setStatus("You press a button in the elevator. Floor B9.");
+		      	Terminal.pause(2.25);
 		      	world.changeRoom(world.getRoomNum()+1);
 		      	room = world.getCurrentRoom();
 		      	setPlaces();
-		      }else{
+		      }else if(world.getRoomNum() == 2){
+			setStatus("You pull the only book on the bookshelf to reveal a hidden passage.");
+			Terminal.pause(2.25);
+			world.changeRoom(world.getRoomNum()+1);
+			room = world.getCurrentRoom();
+			setPlaces();
+			}else{
 			setStatus("You find a ladder to a secret tunnel...");
-			Terminal.pause(1.25);
+			Terminal.pause(1.5);
 			world.changeRoom(world.getRoomNum() + 1);
 			Terminal.clear();
 			EndScreen end = new EndScreen();
@@ -304,11 +319,12 @@ public class Game {
 				a.draw();
 			}
                    }
-                        // read a key from the user
+                        
+			 // read a key from the user
                         Terminal.warpCursor(room.getRows() + 1, 0);
                         Key key = Terminal.getKey();
                         playing = handleKey(key);
-
+		
                         // clear status by default
                         setStatus("");
 
@@ -321,7 +337,9 @@ public class Game {
 			}
                         // check for battles
                         if (checkBattles() == false) {
+				Terminal.warpCursor(0,0);
                                 setStatus("You have been killed :(\n\r");
+				Terminal.pause(1.25);
                                 playing = false;
                         }
 

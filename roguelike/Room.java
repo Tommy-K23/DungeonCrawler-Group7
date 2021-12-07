@@ -103,9 +103,13 @@ public class Room {
                                 for (int col = 0; col < cols; col++) {
                                         if (grid[row].charAt(col) == '^') {
                                                 boxes.add(new Box(row, col, ItemGenerator.generate()));
-                                        }
-                                }
+                                        }                                
+				}
+
                         }
+		if(boxes.size() == 0){
+		boxes.add(new Box(6, 10, ItemGenerator.generate()));
+		}
                 }
 
                 return boxes;
