@@ -1,4 +1,9 @@
-// Character.java
+/**
+ * A <b>Character</b> is a type of Entity. This class allows for battles 
+ * between characters (<b>Enemy</b> vs <b>Player</b>), see {@link
+ * Character#dealDamage} and {@link Character#fight}.
+ *
+ */
 
 import java.util.ArrayList;
 
@@ -9,20 +14,56 @@ public abstract class Character extends Entity {
         // the characters health points
         private int hp;
 
+		/**
+		 * A constructor for <b>Character</b>s.
+		 * @param row their row position.
+		 * @param col their column position.
+		 * @param display their display character.
+		 * @param color the color of their display character.
+		 * @param hp health points.
+		 */
         public Character(int row, int col, char display, Color color, int hp) {
                 super(row, col, display, color);
                 this.hp = hp;
         }
 
-        // get the hp, damage, protection and name of character
+        /**
+		 * Get the health of the <b>Character</b>.
+		 *
+		 * @return hp of the character.
+		 */
         public int getHealth() {
                 return hp;
         }
+
+		/**
+		 * Gets the amount of damage the <b>Character</b> does.
+		 *
+		 * @return the damage the character does.
+		 */
         public abstract int getDamage();
+
+		/**
+		 * Gets the protection the <b>Character</b> has.
+		 *
+		 * @return protection.
+		 */
         public abstract int getProtection();
+
+		/**
+		 * Gets the <b>Character</b>'s name.
+		 *
+		 * @return the character's name.
+		 */
         public abstract String getName();
 
-        // do damage to another player, returns if they died
+        /**
+		 * Do damage in a battle to another <b>Character</b>.
+		 * @param other a character in battle.
+		 * @param room the current room.
+		 *
+		 * @return true if the character has been killed.
+		 */
         private boolean dealDamage(Character other, Room room) {
                 // this character does damage to the other character
                 int damageDone = getDamage() - other.getProtection();
@@ -53,12 +94,21 @@ public abstract class Character extends Entity {
                 }
         }
         @Override
+		/**
+		 * Saves the <b>Character</b> to the save file.
+		 * @param pw the <b>PrintWriter</b> that writes data to the save file.
+		 */
         public void save (PrintWriter pw)//Save
         {
                 super.save(pw);
                 pw.println(hp);
         }
 
+		/**
+		 * Loads the <b>Character</b> frm the save file,
+		 * @param in the Scanner that reads from the save file.
+		 * @param color the character's color.
+		 */
 	public Character(Scanner in, Color color)//load
 	{
 		super(in , color);
@@ -66,8 +116,14 @@ public abstract class Character extends Entity {
     }   
 
 
-    // this method performs one round of battle between two characters
-    // return false if the player has died as a result
+    /**
+	 * Performs a round of battle between two <b>Character</b>s.
+	 * @param other a character in the battle.
+	 * @param room the current room.
+	 * @param enemies an <b>ArrayList</b> of enemies.
+	 *
+	 * @return false if a character in battle has died.
+	 */
     public boolean fight(Character other, Room room, ArrayList<Enemy> enemies) {
         // do damage to them first
         boolean killed = dealDamage(other, room);

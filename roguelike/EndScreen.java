@@ -1,4 +1,11 @@
 import ansi_terminal.*;
+
+/**
+ * This class is an "<b>End Screen</b>" that appears when the <b>Player</b>
+ * has successfully escaped the lab. 
+ *
+ * @author TK
+ */
 public class EndScreen {
 
 private String end[] = {
@@ -32,8 +39,16 @@ private int cols = 107;
 private boolean quit = false;
 MainMenu menu = new MainMenu();
 private String status = "";
+
+	/**
+	 * Constructor for the <b>End Screen</b>.
+	 */
 	public EndScreen() {}
 
+	/**
+	 * Runs the end screen (draws to screen and waits for
+	 * key press to quit).
+	 */
 	public void run() {
 		Terminal.clear();
 		drawMap();
@@ -44,6 +59,10 @@ private String status = "";
 		Terminal.clear();
 	}
 
+	/**
+	 * Handles the key press to exit back to the <b>Main Menu</b>.
+	 * @param key the key press.
+	 */
 	public void handleKey(Key key){
 		switch(key){
 			case ENTER:
@@ -54,11 +73,18 @@ private String status = "";
 		}
 	}
 
+	/**
+	 * Prints a status to the screen.
+	 * @param status a message.
+	 */
 	public void printStatus(String status){
 		Terminal.warpCursor(0,0);
 		System.out.print(status);
 	}
-	
+
+	/**
+	 * Draws the <b>End Screen</b> to the screen.
+	 */
 	public void drawMap(){
 		Terminal.reset();
 		Terminal.clear();

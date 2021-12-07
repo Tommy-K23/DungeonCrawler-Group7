@@ -1,12 +1,26 @@
-// EnemyGenerator.java
-// this class contains a static method for creating enemies randomly
-
+/**
+ * This class generates enemies. All enemies have a name, row and
+ * column positions, hp (health points), damage points, and protection points.
+ * The number of enemies is fixed. Types of enemies and their values are also fixed,
+ * but which enemy is generated is random.
+ *
+ * @author ET
+ */
 import java.util.Random;
 
 public class EnemyGenerator {
+
+	/**
+	 * This method generates an <b>Enemy</b> by picking a random number that
+	 * is assigned to an enemy.
+	 * @param row the row position on the map.
+	 * @param col the column position on the map.
+	 *
+	 * @return a new <b>Enemy</b>.
+	 */
     public static Enemy generate(int row, int col) 
     {
-        // TODO: replace this with your own code!
+
         Random numgen = new Random();
         int enemycount = 4; //how many unique enemy types we have
         int EnemyID = (1+numgen.nextInt(enemycount)); //generate a random int between 1 and enemycount+1

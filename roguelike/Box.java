@@ -1,5 +1,7 @@
-// Box.java
-// represents a pickup-able item
+/**
+ * This class represents an item that is able to be picked up by the <b>Player</b>.
+ * "<b>Boxes</b>" are spaces on the grid with items in them.
+ */
 
 import ansi_terminal.*;
 import java.util.Scanner;
@@ -9,13 +11,21 @@ public class Box extends Entity {
         // the Item that is in the box
         private Item item;
 
-        // add a box with a given item in it
+        /**
+		 * Adds a box with an <b>Item</b> in it.
+		 * @param row the row position of the box.
+		 * @param col the column position of the box.
+		 * @param item the item that is in the box.
+		 */
         public Box(int row, int col, Item item) {
                 super(row, col, '^', Color.YELLOW);
                 this.item = item;
         }
 
-                
+        /**
+		 * Loads the <b>Box</b> with the <b>Item</b> from the save file.
+		 * @param in the Scanner that reads data from the save file.
+		 */
         public Box(Scanner in)//load
         {
                 super(in, Color.YELLOW);
@@ -39,6 +49,10 @@ public class Box extends Entity {
         }
 
         @Override
+		/**
+		 * Saves the <b>Box</b> to the save file.
+		 * @param pw the <b>PrintWriter</b> that gives the data to the save file.
+		 */
         public void save(PrintWriter pw)//save
         {
                 super.save(pw);
@@ -50,7 +64,11 @@ public class Box extends Entity {
         }   
 
 
-
+		/**
+		 * Gets the <b>Item</b> from the box.
+		 *
+		 * @return the item.
+		 */
         public Item getItem() {
                 return item;
         }

@@ -1,4 +1,8 @@
-// Player.java
+/**
+ * The <b>Player</b> is the "main character", the one that plays the game.
+ * Player will start at a fixed position. Players have access to one <b>Inventory</b>.
+ * Player will start with three items in their inventory, one of each <b>ItemType</b>.
+ */
 
 import ansi_terminal.*;
 import java.util.Scanner;
@@ -7,7 +11,12 @@ public class Player extends Character {
     private Inventory items;
     protected String name;
     protected String profession;
-    
+   
+   	/**
+	 * Constructor for the <b>Player</b>. Gives an inventory and items
+	 * to the player.
+	 * @param start the <b>Position</b> that the player starts on.
+	 */
     public Player(Position start) {
         // our starting details
         super(start.getRow(), start.getCol(), '@', Color.CYAN, 50);
@@ -23,6 +32,10 @@ public class Player extends Character {
     }
 
     @Override
+	/**
+	 * Saves the <b>Player</b> into the save file.
+	 * @param pw the <b>PrintWriter</b> that writes the data into the save file.
+	 */
     public void save(PrintWriter pw)
     {
         super.save(pw);
@@ -42,6 +55,10 @@ public class Player extends Character {
 
     }
 
+	/**
+	 * Loads the <b>Player</b> from the save file.
+	 * @param in the Scanner that reads data from the save file.
+	 */
     public Player(Scanner in) 
     {
 	super(in, Color.CYAN);
@@ -67,6 +84,11 @@ public class Player extends Character {
     }
 
     @Override
+	/**
+	 * Gets the amount of damage that the <b>Player</b> does.
+	 * 
+	 * @return the player's damage.
+	 */
     public int getDamage() {
         Item weapon = items.getEquippedWeapon();
         if (weapon != null) {
@@ -77,24 +99,45 @@ public class Player extends Character {
         }
     }
 
+	/**
+	 * Sets the player's name.
+	 */
     public void setName(String name) {
         this.name = name;
     }
 
     @Override
+	/**
+	 * Gets the player's name.
+	 *
+	 * @return the player's name.
+	 */
     public String getName() {
         return name;
     }
 
+	/**
+	 * Sets the player's profession.
+	 */
     public void setProfession(String profession) {
         this.profession = profession;
     }
 
+	/**
+	 * Gets the player's profession.
+	 *
+	 * @return the player's profession.
+	 */
     public String getProfession() {
         return profession;
     }
 
     @Override
+	/**
+	 * Gets the player's protection from damage.
+	 *
+	 * @return player's protection from damage.
+	 */
     public int getProtection() {
         Item armor = items.getEquippedArmor();
         if (armor != null) {
@@ -105,6 +148,11 @@ public class Player extends Character {
         }
     }
 
+	/**
+	 * Gets the player's <b>Inventory</b>.
+	 *
+	 * @return the items in the player's inventory.
+	 */
     public Inventory getInventory() {
         return items;
     }
