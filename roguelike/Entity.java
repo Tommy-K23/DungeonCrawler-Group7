@@ -52,7 +52,8 @@ public class Entity {
 	    in.nextLine();
         String d = in.nextLine();
 	//String clr = in.nextLine();
-        position = new Position(row, col);
+        Position position = new Position(row, col);
+	setPosition(position);
         display = d.charAt(0);
 
     }

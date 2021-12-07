@@ -43,8 +43,8 @@ public class World
         String[] grid2 = 
         {
 "       #############################                                               ",
-"       ##          |___|          ##                                               ",
-"       ##            *            ##                                               ",
+"       ##          |_*__|         ##                                               ",
+"       ##                         ##                                               ",
 "       ##                         ##                                               ",
 "       ##                         ##                                               ",
 "       ##       ___  .            ##                                               ",
@@ -148,9 +148,8 @@ public class World
 		}
 		
 		if (x>=4)
-		{Terminal.clear();
-		 currentRoom=r4;
-        	 roomNum = 4;
+		{currentRoom = r1;	 
+	   	 roomNum = 1;
 
 		}
 

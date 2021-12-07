@@ -87,7 +87,7 @@ public class Game {
                         world = new World(in);
                         player = new Player(in);
                         room = world.getCurrentRoom();
-                        boxes = world.getCurrentRoom().getBoxes();
+                        boxes = room.getBoxes();
                         enemies = room.getEnemies();
                         teleporters = room.getTeleporters();
 
@@ -133,7 +133,7 @@ public class Game {
                         Terminal.pause(1.25); }
                 else {
                       if (world.getRoomNum() < 3){
-		      	setStatus("Changing Rooms..." + world.getRoomNum());
+		      	setStatus("Changing Rooms...");
 		      	Terminal.pause(1.25);
 		      	world.changeRoom(world.getRoomNum()+1);
 		      	room = world.getCurrentRoom();
@@ -141,6 +141,7 @@ public class Game {
 		      }else{
 			setStatus("You find a ladder to a secret tunnel...");
 			Terminal.pause(1.25);
+			world.changeRoom(world.getRoomNum() + 1);
 			Terminal.clear();
 			EndScreen end = new EndScreen();
 			end.run();
@@ -315,7 +316,9 @@ public class Game {
                         for (Enemy enemy : enemies) {
                                 enemy.walk(room);
                         }
-
+			for (Boss boss : boss) {
+				boss.walk(room);
+			}
                         // check for battles
                         if (checkBattles() == false) {
                                 setStatus("You have been killed :(\n\r");
