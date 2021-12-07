@@ -3,6 +3,10 @@ import java.util.Scanner;
 import java.io.PrintWriter;
 public class World
 {
+/**
+*The World class contains the Rooms of the Game.
+*Provides a way to change Rooms.
+*/
         String[] grid1 = 
         {
 "                       ############                     ",//1
@@ -113,6 +117,10 @@ public class World
 	    static Room r4;
 	    int rows;
 	    int cols;
+        /**
+        *Constructor that creates a world.
+        *The World has 3 distinct rooms, with unchanging maps.
+        */
         public World() //Supposed to create the 3 levels, then set the current room to room 1.
         {
                 r1 = new Room(grid1, 31, 56);
@@ -123,11 +131,18 @@ public class World
 	
                 currentRoom = r1;
         }
-
+        /**
+        *Method that returns the number that correlates to a room.
+        *Room1's correlating number is 1, Room2's number is 2, and so on.
+        *@returns an integer vlaue
+        */
         public Room getCurrentRoom ()
         {return currentRoom;}
 
-
+        /**
+        *Method that changes the Room to a different one.
+        *@param x is the number correlating to which room you want to change to.
+        */
         public void changeRoom(int x)//takes an int as an arguement and translates it to change the currentRoom to its respective level.
 
         {
@@ -155,7 +170,10 @@ public class World
 
         }
 
-
+        /**
+        *Method that returns the level number for the current Room.
+        *@returns an int that correlates to the level number of a Room.
+        */
         public static int getRoomNum()//returns the level number for the current room.
         {
         return roomNum;
@@ -164,10 +182,17 @@ public class World
 	public int getRows()
 	{return rows;}
 
+    /**
+    *Getter method that returns the number of columns
+    *@returns the number of columns of the current Room.
+    */
 	public int getCols()
 	{return cols;}
 
-
+        /**
+        *Saves the currentRoom to a file.
+        *@param pw is a PrintWriter Object.
+        */
         public void save(PrintWriter pw)
         {
         pw.println(getRoomNum());
@@ -183,7 +208,10 @@ public class World
         	break;
 	}
 	}
-
+        /**Creates a World, but also takes in a Scanner, which is passed in to the room to be loaded.
+        *Creating a World with this Constructor will only load one Room from the file.
+        *The number correlating to the Room is provided in the save file which determines what room gets created.
+        */
         public World (Scanner in)
         {
 

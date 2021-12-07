@@ -1,6 +1,10 @@
-// Room.java
-// provides code for the drawing of a room
-// also provides starting locations for the player, boxes, and enemies
+/**
+*Provides code for the drawing of a room
+*Also provides starting locations for the player, boxes, and enemies
+*Holds the geometry of a Room, as well as the size of the room.
+*Also holds all entities in the Room.
+*/
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import ansi_terminal.*;
@@ -16,16 +20,23 @@ public class Room {
         protected ArrayList<Box> boxes;
         protected ArrayList<Enemy> enemies;
         protected ArrayList<Boss> boss;
-
+/**
+*Standard constructor for creating the room. Used when making a new Game.
+*@param grid[] is a set of Strings that represents the physical space of a Room, or level.
+*@param rows is an integer that is the number of rows in the grid.
+*@param cols is an integer that is the number of columns in the grid.
+*/
         public Room(String grid[], int rows, int cols) {
-                // this initializes the grid for room one
                 this.grid = grid;
                 this.rows = rows;
                 this.cols = cols;
                 load = false; 
 
         }
-
+/**
+*Method that takes in a PrintWriter object and uses it to save all entities stored in the room.
+*@param pw is the name assigned to the PrintWriter object.
+*/
         public void save(PrintWriter pw)
         {
                 // we need to save boxes and enemies.
@@ -46,7 +57,13 @@ public class Room {
                 for (Boss boss : boss)
                 {boss.save(pw);}
         }
-
+/**
+*Constructor that is used for Room when the game is being loaded from a file.
+*The only difference between this constructor and the standard one, is that it also fills ArrayLists with entities from the save file.
+*@param grid[] is a set of Strings that represents the physical space of a Room, or level.
+*@param rows is an integet that is the number of rows in the grid.
+*@param cols is an integer that is the number of columns in the grid.
+*/
         public Room (String grid[], int rows, int cols, Scanner in)
         {
                 load=true;
@@ -78,8 +95,10 @@ public class Room {
                         boss.add(currentLoadBoss);
                 }
         }
-
-        // returns the player's strting location in this room
+        /**
+        *Method that searches for the maps predetermined player start position, and sets the player there.
+        *@returns the Player Position in this room
+        */
         public Position getPlayerStart() {
                 for (int row = 0; row < rows; row++) {
                         for (int col = 0; col < cols; col++) {
@@ -91,9 +110,10 @@ public class Room {
 
                 return null;
         }
-
-        // returns a set of item boxes for this map, this is here because it depends on
-        // the room geometry for where the boxes make sense to be
+        /**
+        *creates a new set of Boxes if this is the first time the room is being loaded. Otherwise, returns an ArrayList with at least one Dummy Box, which is meant to eliminate NullPointerErrors.
+        *@returns a set of item boxes for this map, this is here because it depends on the room geometry for where the boxes make sense to be
+        */
         public ArrayList<Box> getBoxes() {
 
                 if(boxes==null)
@@ -114,8 +134,10 @@ public class Room {
 
                 return boxes;
         }
-
-        // returns a set of teleporters for each map
+        /**
+        *creates an ArrayList for where a Teleporter, or several may be stored.
+        *@returns a set of teleporters for each map
+        */
         public ArrayList<Teleporter> getTeleporters() {
 
                 ArrayList<Teleporter> teleporters = new ArrayList<Teleporter>();
@@ -129,8 +151,10 @@ public class Room {
                 }
                 return teleporters;
         }
-
-        // returns a set of enemies from this map, similarly to the boxes above
+        /**
+        *Creates or returns an ArrayList containing a Room's enemies.
+        *@returns a set of enemies from this map.
+        */
         public ArrayList<Enemy> getEnemies() {
 
                 if(enemies==null)
@@ -148,7 +172,10 @@ public class Room {
 
                 return enemies;
         }
-        // returns a boss for the final map
+        /**
+        *Creates an Array with a Boss inside and returns that Array.
+        *@returns a boss for the final Room
+        */
         public ArrayList<Boss> getBoss() {
                 if(boss==null)
                 {
@@ -165,16 +192,24 @@ public class Room {
                 
                 return boss; 
         }
-
+        /**
+        *Getter for the Room's number of rows.
+        *@returns an integer
+        */
         public int getRows() {
                 return rows;
         }
-
+        /**
+        *Getter for the Room's number of columns.
+        *@returns an integer
+        */
         public int getCols() {
                 return cols;
         }
 
-        // draws the map to the screen
+        /**
+        *draws the map to the screen
+        */
         public void draw() {
                 Terminal.clear();
                 for (int row = 0; row < rows; row++) {
@@ -192,8 +227,13 @@ public class Room {
                         System.out.print("\n\r");
                 }
         }
-
-        // returns if a given cell in the map is walkable or not
+        /**
+        *Checks to see whether a gridspace can be walked upon in a Room.
+        *Vital for keeping Entities inside of the Room.
+        *@param row is the integer value for the row being checked.
+        *@param col is the integer value for the column being checked.
+        *@returns if a given cell in the map is walkable or not
+        */
         public boolean canGo(int row, int col) {
                 return grid[row].charAt(col) != '#';
 

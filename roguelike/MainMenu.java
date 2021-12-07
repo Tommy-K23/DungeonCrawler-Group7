@@ -4,8 +4,14 @@ import ansi_terminal.*;
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.File;
+
 public class MainMenu
 {
+ /**
+*The MainMenu Class is what gets called from Main.
+*This class contains the Game class, and all subsequent classes.
+*Allows the player to choose different options from a nifty little menu.
+*/       
         int option;
 
         String [] menuGraphic =
@@ -42,10 +48,14 @@ public class MainMenu
         String status="";
         boolean quit = false;
         Game game = null;
-
+/**
+*Simply creates a MainMenu object. Does nothing else.
+*/
         public MainMenu()
         {}
-
+/**
+*Opens up the Main Menu and allows the player to interact with it, and subsequently, an instance of the Game.
+*/
         public void run()
         {
                 Terminal.clear();
@@ -58,6 +68,10 @@ public class MainMenu
                 }
                 Terminal.clear();
         }
+/**
+*Moves the selection cursor to its correct position based off of what option number it is supposed to be moved to.
+*@param option is the number that correlates to the option you want the cursor to be moved to.
+*/
         private void drawCursor(int option)
         {
             
@@ -106,6 +120,10 @@ public class MainMenu
                         cursorCol=48;
                 }
         }
+        /**
+        *Allows the user to provide different inputs, and makes the system act accordingly.
+        *@param key is the raw input that the user passes in from their keyboard.
+        */
         private void handleKey(Key key)
         {
                 switch (key)
@@ -121,7 +139,10 @@ public class MainMenu
                 }
 
         }
-
+        /**
+        *Used when the player presses the enter key while on a specific option.
+        *@param option is the number correlating to the option that the player is executing.
+        */
         private void select (int option)
         {
                 switch (option)
@@ -168,7 +189,9 @@ public class MainMenu
 
                 }
         }
-
+/**
+*Provides a convenient way to print messages to the screen in a uniform spot.
+*/
         private void printStatus(String status)
         {
                 Terminal.warpCursor(0,0);
@@ -176,19 +199,27 @@ public class MainMenu
         }
 
 
-
+/**
+*Method that decrements the Option number, so long as it stays within predetermined bounds.
+*The option integer is not allowed to be less than one.
+*/
         private void cursorUp()
         {
                 if (option>1)
                 { option--;}
         }
-
+/**
+*Method that increments the option number, so long as it stays within predetermined bounds.
+*The option integer is not allowed to increment past 4.
+*/
         private void cursorDown()
         {
                 if (option < 4)
                 {option++;}
         }
-
+/**
+*Method that prints the contents of the graphical display.
+*/
         private void drawMap()
         {
                 Terminal.reset();

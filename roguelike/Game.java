@@ -7,7 +7,10 @@ import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 import java.io.File;
-
+/**
+*The Game class handles the actual running of the game.
+*It pieces together all the other classes and runs them together.
+*/
 public class Game {
         private Room room;
         private Player player;
@@ -19,6 +22,12 @@ public class Game {
 	private String name;
 	private String profession;
         PrintWriter pw =null;
+        
+/**
+*This is a constructor for a game object. This is meant to be run when starting a new game.
+*
+*/
+
         public Game() {
                 Terminal.warpCursor(21, 0);
                 name = Terminal.getLine("What is your name? ");
@@ -42,7 +51,9 @@ public class Game {
 		setPlaces();
 		
         }
-
+/**
+*This method initializes all the ArrayLists that contain entities for the room.
+*/
 	private void setPlaces() {        	   
 		player.setPosition(room.getPlayerStart());
                 boxes = room.getBoxes();
@@ -50,8 +61,9 @@ public class Game {
                 teleporters = room.getTeleporters();
                 boss = room.getBoss();
 	}
-
-        // prints a help menu to the left of the map
+        /**
+        *prints a help menu to the left of the map
+        */
         private void showHelp() {
                 String[] cmds = {"Commands:",
                         "---------",
@@ -73,7 +85,9 @@ public class Game {
                 Terminal.reset();
         }
 
-        //Saves the game to a file, "save.txt"
+        /**
+        *Attempts to save a file containing information pertaining to a Room's entities. It will save the Room that the player is currently in. It only saves that room. This is because if a player has left a room, they are not expected to go back in ever again. In addition, any room ahead do not need to be saved, because the player has never modified them.
+        */
         public void save() {
                 try{
                         if(pw==null)
@@ -81,7 +95,7 @@ public class Game {
                                 pw = new PrintWriter("save.txt");
                         }
 
-                        world.save(pw);//calls world save, which calls rooms 1,2, and 3, to save. This in turn should save each of their respective boxes, and enemies. Player.save should be called separately.
+                        world.save(pw);//calls world save which saves rooms, which saves all room entities.
                         player.save(pw);
 
                         pw.close();//MUST CLOSE FILE PROPERLY WHEN DONE
@@ -89,7 +103,10 @@ public class Game {
                         System.out.print("Could not load save file.\n\r");
                 }
         }
-
+    /**
+    *Constructor for a Game object, reads from the save file to create a new game object.
+    *@param in is a Scanner object that gets created here or a class using Game, that can be passed in.
+    */
         public Game (Scanner in)//Load the game from a text save file
         {
 
@@ -104,8 +121,11 @@ public class Game {
 
 
 
-
-        // right under the map we keep a line for status messages
+    /**
+    *Writes a message that is displayed under the map.
+    *@param mesg is a String that contains whatever message you want to be displayed.
+    *The method clears any potential old messages and prints a new one.
+    */
         private void setStatus(String mesg) {
                 // clear anything old first
                 Terminal.warpCursor(room.getRows(), 0);
@@ -117,8 +137,12 @@ public class Game {
                 Terminal.warpCursor(room.getRows(), 0);
                 System.out.print(mesg);
         }
-
-        // code for when the player tries to pickup an item
+        /**
+        *This method is used when a player attempts to pick up an item.
+        *The method checks the player's tile for a box, to see if there is one.
+        *if there is one, then the player tries to pick up the item.
+        *they can so long as there is there is space in their inventory.
+        */
         private void pickup() {
                 Box thing = checkForBox();
                 if (thing == null) {
@@ -134,7 +158,9 @@ public class Game {
                         Terminal.pause(1.25);
                 }
         }
-
+        /**
+        *This method displays messages pertaining to using a Teleporter, and actually changes the World's current Room.
+        */
         private void teleport() {
                 Teleporter thing = checkForTeleport();
                 if (thing == null) 
@@ -163,7 +189,11 @@ public class Game {
 		      }	
                 }
         }
-
+    /**
+    *Attempts to drop an Item from the Player inventory. The player must choose which item is dropped.
+    *A dropped item will be contained within a new box which is created upon drop.
+    *An item cannot be dropped onto a space which is already occupied by another box.
+    */
         // code for when the player tries to drop an item
         private void drop() {
                 if (checkForBox() == null) {
@@ -177,7 +207,12 @@ public class Game {
                         Terminal.pause(1.25);
                 }
         }
-
+/**
+*Takes in input from the user and then applies it to the Game.
+*Effectively controls the Game.
+*Returns false when the game is quit.
+*@param key is the raw input that the player passes in based on what key they press on their keyboard.
+*/
         // handle the key which was read - return false if we quit the game
         private boolean handleKey(Key key) {
                 switch (key) {
@@ -234,13 +269,17 @@ public class Game {
                 return true;
         }
 
-        // this is called when we need to redraw the room and help menu
-        // this happens after going into a menu like for choosing items
+        /**
+        *This method redraws the Game map.
+        *This is used after opening menus, in order to show the gamespace again.
+        */
         private void redrawMapAndHelp() {
                 room.draw();
                 showHelp();
         }
-
+        /**
+        *A method that simply checks for whether the tile that the player occupies also holds a box.
+        */
         // returns a Box if the player is on it -- otherwise null
         private Box checkForBox() {
                 Position playerLocation = player.getPosition();
@@ -253,7 +292,9 @@ public class Game {
 
                 return null;
         }
-
+        /**
+        *A method that simply checks for whether the tile that the player occupies also holds a box.
+        */
         private Teleporter checkForTeleport()
         {
                 Position playerLocation = player.getPosition();
@@ -266,7 +307,10 @@ public class Game {
                 return null;
 
         }
-        // check for battles and return false if player has died
+        /**
+        *A method that checks for battles
+        *@returns false if the Player dies in battle.
+        */
         private boolean checkBattles() {
                 Position playerLocation = player.getPosition();
 
@@ -296,7 +340,10 @@ public class Game {
                 return true;
         }
 
-
+        /**
+        *Combines all other methods in this class in order to run the Game.
+        *consists of a loop in which the player is set to make choices, such as movement, item management, and fighting with enemies.
+        */
         public void run() {
                 // draw these for the first time now
                 redrawMapAndHelp();
